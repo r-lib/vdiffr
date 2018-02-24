@@ -143,7 +143,7 @@ check_versions_match <- function(dep, system_ver, strip_minor = FALSE) {
   if (cases_ver > system_ver) {
     msg <- glue(
       "Failed doppelganger was generated with a newer { dep } version.
-       Please install FreeType {cases_ver} on your system"
+       Please install { dep } {cases_ver} on your system"
     )
     return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }

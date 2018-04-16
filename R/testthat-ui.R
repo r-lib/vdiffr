@@ -115,38 +115,43 @@ compare_figs <- function(case) {
   push_log(case)
 
   check_versions_match("FreeType", system_freetype_version(), strip = TRUE)
-  check_versions_match("Cairo", gdtools::version_cairo(), strip = FALSE)
+  check_versions_match("Cairo",    gdtools::version_cairo(),  strip = FALSE)
 
   msg <- paste0("Figures don't match: ", case$name, ".svg\n")
   mismatch_exp(msg, case)
 }
 
 check_versions_match <- function(dep, version, strip = FALSE) {
-  cases_ver <- cases_pkg_version(dep, strip = strip)
-  system_ver <- system_freetype_version()
+  cases_ver   <- cases_pkg_version(dep, strip = strip)
+  system_ver  <- version
 
   if (is_null(cases_ver)) {
     msg <- glue(
-      "Failed doppelganger but vdiffr can't check its FreeType version.
+      "Failed doppelganger but vdiffr can't check its { dep } version.
        Please revalidate cases with a more recent vdiffr"
     )
+    return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
   else if (cases_ver < system_ver) {
     msg <- glue(
       "Failed doppelganger was generated with an older { dep } version.
        Please revalidate cases with vdiffr::validate_cases() or vdiffr::manage_cases()"
     )
+    return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
   else if (cases_ver > system_ver) {
     msg <- glue(
-      "Failed doppelganger was generated with a newer FreeType version.
+      "Failed doppelganger was generated with a newer { dep } version.
        Please install FreeType {cases_ver} on your system"
     )
+    return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
-  else
-    stop("Error comparing versions.")
+  else if(cases_ver != system_ver)
+  {
+    msg <- glue("Incompatible versions of { dep }: '{cases_ver}'  vs. '{system_ver}'")
+    return_from(caller_env(), skipped_mismatch_exp(msg, case))
+  }
 
-  return_from(caller_env(), skipped_mismatch_exp(msg, case))
 }
 
 # Go back up one level by default as we should be in the `testthat`

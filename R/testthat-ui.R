@@ -130,24 +130,23 @@ check_versions_match <- function(dep, version, strip = FALSE) {
       "Failed doppelganger but vdiffr can't check its FreeType version.
        Please revalidate cases with a more recent vdiffr"
     )
-    return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
-
-  if (cases_ver < system_ver) {
+  else if (cases_ver < system_ver) {
     msg <- glue(
       "Failed doppelganger was generated with an older { dep } version.
        Please revalidate cases with vdiffr::validate_cases() or vdiffr::manage_cases()"
     )
-    return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
-
-  if (cases_ver > system_ver) {
+  else if (cases_ver > system_ver) {
     msg <- glue(
       "Failed doppelganger was generated with a newer FreeType version.
        Please install FreeType {cases_ver} on your system"
     )
-    return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
+  else
+    stop("Error comparing versions.")
+
+  return_from(caller_env(), skipped_mismatch_exp(msg, case))
 }
 
 # Go back up one level by default as we should be in the `testthat`

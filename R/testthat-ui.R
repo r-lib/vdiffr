@@ -122,7 +122,7 @@ compare_figs <- function(case) {
 }
 
 check_versions_match <- function(dep, system_ver, strip_minor = FALSE) {
-  cases_ver <- cases_pkg_version(dep, strip = strip_minor)
+  cases_ver <- cases_pkg_version(dep, strip_minor = strip_minor)
 
   if (is_null(cases_ver)) {
     msg <- glue(
@@ -184,7 +184,7 @@ system_freetype_version <- function() {
   as_version(ver)
 }
 as_version <- function(ver) {
-  ver <- gsub("^.*:", "", ver) # remove package name from version string
+  #ver <- gsub("^.*:", "", ver) # remove package name from version string
   ver <- strsplit(ver, ".", fixed = TRUE)[[1]]
   ver <- as.integer(ver)
   structure(list(ver), class = c("package_version", "numeric_version"))

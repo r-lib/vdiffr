@@ -114,16 +114,15 @@ compare_figs <- function(case) {
   maybe_collect_case(case)
   push_log(case)
 
-  check_versions_match("FreeType", system_freetype_version(), strip = TRUE)
-  check_versions_match("Cairo",    gdtools::version_cairo(),  strip = FALSE)
+  check_versions_match("FreeType", system_freetype_version(), strip_minor = TRUE)
+  check_versions_match("Cairo", gdtools::version_cairo(), strip_minor = FALSE)
 
   msg <- paste0("Figures don't match: ", case$name, ".svg\n")
   mismatch_exp(msg, case)
 }
 
-check_versions_match <- function(dep, version, strip = FALSE) {
-  cases_ver   <- cases_pkg_version(dep, strip = strip)
-  system_ver  <- version
+check_versions_match <- function(dep, system_ver, strip_minor = FALSE) {
+  cases_ver <- cases_pkg_version(dep, strip = strip_minor)
 
   if (is_null(cases_ver)) {
     msg <- glue(
@@ -144,7 +143,7 @@ check_versions_match <- function(dep, version, strip = FALSE) {
   if (cases_ver > system_ver) {
     msg <- glue(
       "Failed doppelganger was generated with a newer { dep } version.
-       Please install FreeType {cases_ver} on your system"
+       Please install { dep } {cases_ver} on your system"
     )
     return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
@@ -159,7 +158,7 @@ check_versions_match <- function(dep, version, strip = FALSE) {
 
 # Go back up one level by default as we should be in the `testthat`
 # folder
-cases_pkg_version <- function(pkg, path = "..", strip = FALSE) {
+cases_pkg_version <- function(pkg, path = "..", strip_minor = FALSE) {
   deps <- readLines(file.path(path, "figs", "deps.txt"))
   ver <- purrr::detect(deps, function(dep) grepl(sprintf("^%s:", pkg), dep))
 
@@ -167,16 +166,17 @@ cases_pkg_version <- function(pkg, path = "..", strip = FALSE) {
     return(NULL)
   }
 
-  # Strip "FreeType: " prefix and minor version
-  if (strip) {
-    ver <- substr(ver, 11, nchar(ver))
+  # Strip prefixes like "FreeType: " or "Cairo: "
+  ver <- substr(ver, nchar(pkg) + 3, nchar(ver))
+  # Strip minor version
+  if (strip_minor) {
     ver <- sub(".[0-9]+$", "", ver)
   }
 
   as_version(ver)
 }
 cases_freetype_version <- function(path = "..") {
-  cases_pkg_version("FreeType", path, strip = TRUE)
+  cases_pkg_version("FreeType", path, strip_minor = TRUE)
 }
 
 system_freetype_version <- function() {

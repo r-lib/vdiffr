@@ -184,12 +184,8 @@ system_freetype_version <- function() {
   ver <- sub(".[0-9]+$", "", gdtools::version_freetype())
   as_version(ver)
 }
-as_version <- function(ver) {
-  ver <- gsub("^.*:", "", ver) # remove package name from version string
-  ver <- strsplit(ver, ".", fixed = TRUE)[[1]]
-  ver <- as.integer(ver)
-  structure(list(ver), class = c("package_version", "numeric_version"))
-}
+as_version <- function(ver) base::package_version(ver)
+
 
 # Print only if we're not collecting. The testthat reporter prints
 # verbose cases at a later point.

@@ -150,8 +150,7 @@ check_versions_match <- function(dep, system_ver, strip_minor = FALSE) {
 
   if (cases_ver != system_ver)
   {
-    msg <- glue("Incompatible versions of { dep }: '{cases_ver}'  vs. '{system_ver}'")
-    return_from(caller_env(), skipped_mismatch_exp(msg, case))
+    abort("Internal error: Unexpected dependency version structure")
   }
 
 }
@@ -184,7 +183,7 @@ system_freetype_version <- function() {
   as_version(ver)
 }
 as_version <- function(ver) {
-  #ver <- gsub("^.*:", "", ver) # remove package name from version string
+  ver <- gsub("^.*:", "", ver) # remove package name from version string
   ver <- strsplit(ver, ".", fixed = TRUE)[[1]]
   ver <- as.integer(ver)
   structure(list(ver), class = c("package_version", "numeric_version"))

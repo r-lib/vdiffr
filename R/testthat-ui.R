@@ -132,21 +132,24 @@ check_versions_match <- function(dep, version, strip = FALSE) {
     )
     return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
-  else if (cases_ver < system_ver) {
+
+  if (cases_ver < system_ver) {
     msg <- glue(
       "Failed doppelganger was generated with an older { dep } version.
        Please revalidate cases with vdiffr::validate_cases() or vdiffr::manage_cases()"
     )
     return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
-  else if (cases_ver > system_ver) {
+
+  if (cases_ver > system_ver) {
     msg <- glue(
       "Failed doppelganger was generated with a newer { dep } version.
        Please install FreeType {cases_ver} on your system"
     )
     return_from(caller_env(), skipped_mismatch_exp(msg, case))
   }
-  else if(cases_ver != system_ver)
+
+  if (cases_ver != system_ver)
   {
     msg <- glue("Incompatible versions of { dep }: '{cases_ver}'  vs. '{system_ver}'")
     return_from(caller_env(), skipped_mismatch_exp(msg, case))

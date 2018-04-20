@@ -114,14 +114,16 @@ compare_figs <- function(case) {
   maybe_collect_case(case)
   push_log(case)
 
-  check_versions_match("FreeType", system_freetype_version(), strip_minor = TRUE)
-  check_versions_match("Cairo", gdtools::version_cairo(), strip_minor = FALSE)
+  check_versions_match(case, "FreeType", system_freetype_version(), strip_minor = TRUE)
+  check_versions_match(case, "Cairo", gdtools::version_cairo(), strip_minor = FALSE)
 
   msg <- paste0("Figures don't match: ", case$name, ".svg\n")
   mismatch_exp(msg, case)
 }
 
-check_versions_match <- function(dep, system_ver, strip_minor = FALSE) {
+
+# FIXME: The longjumps are confusing and impede unit testing
+check_versions_match <- function(case, dep, system_ver, strip_minor = FALSE) {
   cases_ver <- cases_pkg_version(dep, strip_minor = strip_minor)
 
   if (is_null(cases_ver)) {

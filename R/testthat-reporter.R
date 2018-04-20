@@ -50,6 +50,14 @@ expectation_error <- function(exp) {
   exp == "error"
 }
 
+last_error_save <- NULL
+
+#' Print last error that occurred during collection
+#' @export
+last_collection_error <- function() {
+  last_error_save
+}
+
 vdiffrReporter <-
   R6::R6Class("vdiffrReporter", inherit = testthat::Reporter,
     public = list(
@@ -79,10 +87,12 @@ vdiffrReporter <-
         meow()
 
         if (!is.null(self$failure)) {
+          last_error_save <<- self$failure
           abort(glue(
             "while collecting vdiffr cases. Last error:
-             test: { self$failure$test }
-             message: { self$failure$message }"
+             * test: { self$failure$test }
+             * message: { self$failure$message }
+             You can inspect this error with `vdiffr::last_collection_error()`"
           ))
         }
         if (length(self$verbose_cases)) {

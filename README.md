@@ -33,6 +33,14 @@ below for some indications.
 
 ## How to use vdiffr
 
+Getting started with vdiffr is a three step process:
+
+1) Add expectations to by including `expect_doppelganger()` in your test files
+1) Run `manage_cases()` to generate the plots which vdiffr will test against in 
+the future. This will launch a shiny gadget which will ask you to confirm
+that each plot is correct
+1) Run `devtools::test()` to execute the tests as normal
+
 ### Adding expectations
 
 vdiffr integrates with testthat through the `expect_doppelganger()`
@@ -71,14 +79,6 @@ Note that in addition to automatic ggtitles, ggplot2 figures are
 assigned the minimalistic theme `theme_test()` (unless they already
 have been assigned a theme).
 
-
-### Running tests
-
-You can run the tests the usual way, for example with
-`devtools::test()`. New cases for which you just wrote an expectation
-will be skipped. Failed tests will show as an error.
-
-
 ### Managing the tests
 
 When you have added new test cases or detected regressions, you can
@@ -113,6 +113,11 @@ handy to showcase the different graphs offered in your package. You
 can also keep track of how your plots change as you tweak their layout
 and add features by checking the history on Github.
 
+### Running tests
+
+You can run the tests the usual way, for example with
+`devtools::test()`. New cases for which you just wrote an expectation
+will be skipped. Failed tests will show as an error.
 
 ### RStudio integration
 

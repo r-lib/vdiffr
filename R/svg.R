@@ -15,6 +15,14 @@ get_aliases <- function() {
 }
 
 write_svg <- function(p, file, title, user_fonts = NULL) {
+  UseMethod("write_svg")
+}
+
+write_svg.plotly <- function(p, file, title, user_fonts = NULL) {
+  withr::with_dir(dirname(file), plotly::orca(p, basename(file)))
+}
+
+write_svg.default <- function(p, file, title, user_fonts = NULL) {
   user_fonts <- user_fonts %||% get_aliases()
   svglite(file, user_fonts = user_fonts)
   on.exit(grDevices::dev.off())

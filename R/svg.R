@@ -20,6 +20,12 @@ write_svg <- function(p, file, title, user_fonts = NULL) {
 
 write_svg.plotly <- function(p, file, title, user_fonts = NULL) {
   withr::with_dir(dirname(file), plotly::orca(p, basename(file)))
+  # remove random ids
+  svg_txt <- readLines(file)
+  def <- strextract(svg_txt, 'defs id=\\"defs-[[:alnum:]]+\\"')
+  id <- sub("defs-", "", strextract(def, "defs-[[:alnum:]]+"))
+  svg_txt <- gsub(id, "", svg_txt, fixed = TRUE)
+  writeLines(svg_txt, file)
 }
 
 write_svg.default <- function(p, file, title, user_fonts = NULL) {

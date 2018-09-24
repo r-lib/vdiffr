@@ -29,12 +29,14 @@ Depends:
     R (>= 3.2.0)
 Imports:
     devtools,
+    diffobj,
     fontquiver (>= 0.2.0),
     freetypeharfbuzz,
     gdtools,
     glue,
     grDevices,
     htmlwidgets (>= 0.6),
+    htmltools,
     purrr (>= 0.2.0),
     rlang,
     R6,
@@ -44,7 +46,6 @@ Imports:
     xml2 (>= 1.0.0)
 Suggests:
     ggplot2 (>= 3.0.0),
-    htmltools,
     roxygen2,
     rstudioapi,
     yaml

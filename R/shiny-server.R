@@ -13,6 +13,8 @@ vdiffrServer <- function(cases) {
     output$toggle <- renderDiffer(input, cases$active, widget_toggle_)
     output$slide <- renderDiffer(input, cases$active, widget_slide_)
     output$diff <- renderDiffer(input, cases$active, widget_diff_)
+    output$diff_text <- renderDiffer(input, cases$active, diff_text_, is_widget = FALSE)
+    output$diff_text_controls <- renderDiffControls(input)
 
     validateGroupCases(input, cases)
     validateSingleCase(input, cases)
@@ -61,8 +63,27 @@ renderCaseInput <- function(input, active_cases) {
   })
 }
 
-renderDiffer <- function(input, active_cases, widget) {
-  renderToggle({
+renderDiffControls <- function(input) {
+  shiny::renderUI({
+    if (!identical(input$active_tab, "diff_text")) {
+      return(htmltools::tags$div())
+    }
+    
+    htmltools::tagList(
+      shiny::br(),
+      shiny::br(),
+      shiny::selectInput(
+        "mode", "Select a diff mode", 
+        choices = c("unified", "sidebyside", "context", "auto")
+      )
+    )
+  })
+}
+  
+renderDiffer <- function(input, active_cases, widget, is_widget = TRUE) {
+  # if widget() returns an htmlwidget, use renderToggle; otherwise assume it's HTML tags
+  renderFunction <- if (is_widget) renderToggle else shiny::renderUI
+  renderFunction({
     # When renderDiffer() is first called, renderCaseInput() has not
     # been called yet.
     if (is.null(input$case)) {
@@ -89,13 +110,14 @@ renderDiffer <- function(input, active_cases, widget) {
       before <- as_inline_svg(read_file(before_path))
     }
 
-    widget(before, after)
+    widget(before, after, input)
   })
 }
 
 withdraw_cases <- function(cases) {
   validate_cases(filter_cases(cases, c("new_case", "mismatch_case")))
-  delete_orphaned_cases(filter_cases(cases, "orphaned_case"))
+  delete_orphaned_cases(filter_cases
+                        (cases, "orphaned_case"))
 }
 
 validateSingleCase <- function(input, reactive_cases) {

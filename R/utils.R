@@ -152,3 +152,8 @@ push_log <- function(case) {
 is_checking <- function() {
   nzchar(Sys.getenv("R_TESTS"))
 }
+
+
+strextract <- function(str, pattern) {
+  regmatches(str, regexpr(pattern, str))
+}

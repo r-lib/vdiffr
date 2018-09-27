@@ -19,8 +19,17 @@ write_svg <- function(p, file, title, user_fonts = NULL) {
 }
 
 write_svg.plotly <- function(p, file, title, user_fonts = NULL) {
+  # set our own deterministic fullData[i].uid
+  # https://github.com/plotly/orca/issues/133
+  uid_data <- "-vdiffr-plotly"
+  p <- plotly::style(p, uid = uid_data)
+  
+  # generate static pdf
+  # TODO: set up an orca server
   withr::with_dir(dirname(file), plotly::orca(p, basename(file)))
-  # remove random ids
+  
+  # strip out random layout.uid
+  # TODO: if and when plotly provides an api for this, use it!
   svg_txt <- readLines(file)
   def <- strextract(svg_txt, 'defs id=\\"defs-[[:alnum:]]+\\"')
   id <- sub("defs-", "", strextract(def, "defs-[[:alnum:]]+"))

@@ -68,7 +68,7 @@ widget_diff_ <- function(before, after, input, width = NULL, height = NULL) {
   )
 }
 
-#' @export
+
 diff_text_ <- function(before, after, input) {
   # https://github.com/brodieG/diffobj/issues/125#issuecomment-414699100
   shiny::HTML(

@@ -7,8 +7,8 @@
 \title{vdiffr: Visual Regression Testing and Graphical Diffing}
 \description{
 An extension to the 'testthat' package that makes it easy
-to add graphical unit tests. It provides a Shiny application to
-manage the test cases.
+    to add graphical unit tests. It provides a Shiny application to
+    manage the test cases.
 }
 \author{
 \strong{Maintainer}: Lionel Henry \email{lionel@rstudio.com}

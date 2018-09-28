@@ -10,17 +10,17 @@
 \alias{widget_diff}
 \title{HTML Widgets for graphical comparison}
 \usage{
-widget_toggle_(before, after, width = NULL, height = NULL)
+widget_toggle_(before, after, input, width = NULL, height = NULL)
 
-widget_slide_(before, after, width = NULL, height = NULL)
+widget_slide_(before, after, input, width = NULL, height = NULL)
 
-widget_diff_(before, after, width = NULL, height = NULL)
+widget_diff_(before, after, input, width = NULL, height = NULL)
 
-widget_toggle(before, after, width = NULL, height = NULL)
+widget_toggle(before, after, input, width = NULL, height = NULL)
 
-widget_slide(before, after, width = NULL, height = NULL)
+widget_slide(before, after, input, width = NULL, height = NULL)
 
-widget_diff(before, after, width = NULL, height = NULL)
+widget_diff(before, after, input, width = NULL, height = NULL)
 }
 \arguments{
 \item{before}{The picture that is taken as reference.}

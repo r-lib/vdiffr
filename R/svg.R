@@ -28,7 +28,7 @@ write_svg.plotly <- function(p, file, title, user_fonts = NULL) {
   # write svg to disk
   owd <- setwd(dirname(file))
   on.exit(setwd(owd))
-  orcaImageServer$export(p, basename(file))
+  plotly::orca(p, basename(file))
   
   # strip out non-deterministic fullLayout.uid
   # TODO: if and when plotly provides an API to pre-specify, use it!

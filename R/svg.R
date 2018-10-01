@@ -14,7 +14,11 @@ get_aliases <- function() {
   aliases
 }
 
-write_svg <- function(p, file, title, user_fonts = NULL) {
+write_svg <- function(p, file, title, user_fonts = NULL, ...) {
+  UseMethod("write_svg")
+}
+  
+write_svg.default <- function(p, file, title, user_fonts = NULL, ...) { 
   user_fonts <- user_fonts %||% get_aliases()
   svglite(file, user_fonts = user_fonts)
   on.exit(grDevices::dev.off())

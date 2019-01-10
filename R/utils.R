@@ -28,7 +28,7 @@ capitalise <- function(x) {
 }
 
 read_file <- function(file) {
-  readChar(file, file.info(file)$size)
+  readChar(file, file.info(file)$size, useBytes = TRUE)
 }
 
 package_version <- function(pkg) {

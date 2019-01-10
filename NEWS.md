@@ -1,6 +1,8 @@
 
 # vdiffr 0.3.0.9000
 
+- Fix warnings in non-UTF-8 MBCS locale (#59, @yutannihilation).
+
 
 # vdiffr 0.3.0
 

@@ -27,6 +27,7 @@ vdiffrServer <- function(cases) {
     validateSingleCase(input, cases)
 
     output$status <- renderStatus(input, cases)
+    output$case_context <- renderCaseContext(input, cases)
 
     quitApp(input)
   })
@@ -175,6 +176,21 @@ validateGroupCases <- function(input, reactive_cases) {
 
         shiny::isolate(reactive_cases$all <- cases)
       }
+    }
+  })
+}
+
+renderCaseContext <- function(input, reactive_cases) {
+  shiny::renderUI({
+    if(length(reactive_cases$active()) > 0 && !is.null(input$case)) {
+      active_case <- reactive_cases$active()[[input$case]]
+      shiny::p(
+        shiny::strong("Context: "),
+        shiny::span(
+          title = active_case$path %||% "",
+          active_case$context %||% "<none>"
+        )
+      )
     }
   })
 }

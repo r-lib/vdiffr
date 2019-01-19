@@ -18,6 +18,7 @@ sidebarPanel <- function() {
     shiny::actionButton("group_validation_button", "Validate these"),
     shiny::br(),
     shiny::br(),
+    shiny::uiOutput("case_context"),
     shiny::uiOutput("case_controls"),
     shiny::actionButton("case_validation_button", "Validate this"),
     shiny::uiOutput("status"),

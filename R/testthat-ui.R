@@ -148,7 +148,8 @@ expect_doppelganger <- function(title,
   case <- case(list(
     name = fig_name,
     path = path,
-    testcase = testcase
+    testcase = testcase,
+    context = context
   ))
 
   if (file.exists(path)) {

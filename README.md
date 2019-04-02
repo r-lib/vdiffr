@@ -8,10 +8,6 @@ vdiffr is an extension to the package testthat that makes it easy to
 test for visual regressions. It provides a Shiny app to manage failed
 tests and visually compare a graphic to its expected output.
 
-**Important:** The CRAN version no longer works properly. Please use
-the development version which removes the dependency on the system
-FreeType library.
-
 
 ## Installation
 

@@ -72,6 +72,11 @@ vdiffrReporter <-
 
       add_result = function(context, test, result) {
         cat(single_letter_summary(result))
+        private$.result_counter <- private$.result_counter + 1
+        if (private$.result_counter >= getOption("width")) {
+          cat("\n")
+          private$.result_counter <- 0
+        }
 
         case <- attr(result, "vdiffr_case")
         if (expectation_error(result)) {
@@ -92,6 +97,10 @@ vdiffrReporter <-
           ))
         }
       }
+    ),
+    
+    private = list(
+      .result_counter = 0
     )
   )
 

@@ -47,11 +47,13 @@ Imports:
     xml2 (>= 1.0.0)
 Suggests:
     crayon,
-    ggplot2 (>= 3.0.0),
+    ggplot2 (>= 3.1.1.9000),
     roxygen2,
     rstudioapi,
     withr,
     yaml
+Remotes:
+    tidyverse/ggplot2@v3.2.0-rc
 LinkingTo:
     freetypeharfbuzz,
     gdtools,

@@ -1,0 +1,16 @@
+destination: docs
+
+navbar:
+  structure:
+    left:  [home, reference, news]
+    right: [github]
+  components:
+    news:
+      text: News
+      menu:
+      - text: "Release notes"
+      - text: "Version 0.3.0"
+        href: https://www.tidyverse.org/articles/2019/01/vdiffr-0-3-0/
+      - text: "------------------"
+      - text: "Change log"
+        href: news/index.html

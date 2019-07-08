@@ -7,3 +7,6 @@
 ^revdep
 ^vdiffr.Rproj$
 ^CRAN-RELEASE$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

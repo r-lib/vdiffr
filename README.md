@@ -1,9 +1,12 @@
 
 # vdiffr
 
-[![CRAN status](https://www.r-pkg.org/badges/version/vdiffr)](https://cran.r-project.org/package=vdiffr)
+<!-- badges: start -->
 [![Travis Build Status](https://travis-ci.org/r-lib/vdiffr.svg?branch=master)](https://travis-ci.org/r-lib/vdiffr)
 [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/github/r-lib/vdiffr?branch=master&svg=true)](https://ci.appveyor.com/project/r-lib/vdiffr)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/vdiffr/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/vdiffr?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/vdiffr)](https://cran.r-project.org/package=vdiffr)
+<!-- badges: end -->
 
 vdiffr is an extension to the package testthat that makes it easy to
 test for visual regressions. It provides a Shiny app to manage failed

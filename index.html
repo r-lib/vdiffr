@@ -7,10 +7,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visual Regression Testing and Graphical Diffing • vdiffr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Visual Regression Testing and Graphical Diffing">
-<meta property="og:description" content="An extension to the 'testthat' package that makes it easy
+<meta property="og:description" content="An extension to the testthat package that makes it easy
     to add graphical unit tests. It provides a Shiny application to
     manage the test cases.">
 <meta name="twitter:card" content="summary">
@@ -40,7 +41,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -68,7 +69,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-lib/vdiffr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -81,6 +82,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="contents col-md-9">
 <div id="vdiffr" class="section level1">
@@ -93,10 +95,10 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Get the development version from github with:</p>
-<pre class="{r}"><code><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github"># install.packages("remotes")
+<pre class="{r}"><code><a href="https://rdrr.io/pkg/remotes/man/install_github.html"># install.packages("remotes")
 remotes::install_github("r-lib/vdiffr")</a></code></pre>
 <p>or the last CRAN release with:</p>
-<pre class="{r}"><code><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages("vdiffr")</a></code></pre>
+<pre class="{r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("vdiffr")</a></code></pre>
 </div>
 <div id="how-to-use-vdiffr" class="section level2">
 <h2 class="hasAnchor">
@@ -104,7 +106,7 @@ remotes::install_github("r-lib/vdiffr")</a></code></pre>
 <p>Getting started with vdiffr is a three step process:</p>
 <p>1) Add expectations to by including <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> in your test files.</p>
 <p>1) Run <code><a href="reference/manage_cases.html">manage_cases()</a></code> to generate the plots which vdiffr will test against in the future. This will launch a shiny gadget which will ask you to confirm that each plot is correct.</p>
-<p>1) Run <code><a href="https://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code> to execute the tests as normal.</p>
+<p>1) Run <code><a href="https://rdrr.io/pkg/devtools/man/test.html">devtools::test()</a></code> to execute the tests as normal.</p>
 <p>When a figure doesn’t matched the saved version, vdiffr signals a failure when it is run interactively, or when it is run on Travis or Appveyor. Mismatches do not cause R CMD check to fail on CRAN machines. See the testing versus monitoring section below.</p>
 <div id="adding-expectations" class="section level3">
 <h3 class="hasAnchor">
@@ -134,13 +136,13 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <li><p>Validate cases. You can do so groupwise (all new cases or all failed cases) or on a case by case basis. When you validate a failed case, the old expected output is replaced by the new one.</p></li>
 <li><p>Delete orphaned cases. During a refactoring of your unit tests, some visual expectations may be removed or renamed. This means that some unused figures will linger in the <code>tests/figs/</code> folder. These figures appear in the Shiny application under the category “Orphaned” and can be cleaned up from there.</p></li>
 </ul>
-<p>Both <code><a href="reference/manage_cases.html">manage_cases()</a></code> and <code><a href="reference/collect_cases.html">collect_cases()</a></code> take <code>package</code> as first argument, the path to your package sources. This argument has exactly the same semantics as in devtools. You can use vdiffr tools the same way as you would use <code><a href="https://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code>, for example. The default is <code>"."</code>, meaning that the package is expected to be found in the current folder.</p>
+<p>Both <code><a href="reference/manage_cases.html">manage_cases()</a></code> and <code><a href="reference/collect_cases.html">collect_cases()</a></code> take <code>package</code> as first argument, the path to your package sources. This argument has exactly the same semantics as in devtools. You can use vdiffr tools the same way as you would use <code><a href="https://rdrr.io/pkg/devtools/man/check.html">devtools::check()</a></code>, for example. The default is <code>"."</code>, meaning that the package is expected to be found in the current folder.</p>
 <p>All validated cases are stored in <code>tests/figs/</code>. This folder may be handy to showcase the different graphs offered in your package. You can also keep track of how your plots change as you tweak their layout and add features by checking the history on Github.</p>
 </div>
 <div id="running-tests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#running-tests" class="anchor"></a>Running tests</h3>
-<p>You can run the tests the usual way, for example with <code><a href="https://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code>. New cases for which you just wrote an expectation will be skipped. Failed tests will show as an error.</p>
+<p>You can run the tests the usual way, for example with <code><a href="https://rdrr.io/pkg/devtools/man/test.html">devtools::test()</a></code>. New cases for which you just wrote an expectation will be skipped. Failed tests will show as an error.</p>
 </div>
 <div id="testing-versus-monitoring" class="section level3">
 <h3 class="hasAnchor">
@@ -148,7 +150,7 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <p>When a figure doesn’t match its saved version, it is only reported as a failure under these circumstances:</p>
 <ul>
 <li><p>When the <code>NOT_CRAN</code> environment variable is set. In particular, devtools sets this when running the tests interactively.</p></li>
-<li><p>On Travis, Appveyor, or any environment where <code><a href="https://www.rdocumentation.org/packages/base/topics/Sys.getenv">Sys.getenv("CI")</a></code> is set.</p></li>
+<li><p>On Travis, Appveyor, or any environment where <code><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv("CI")</a></code> is set.</p></li>
 </ul>
 <p>Otherwise, the failure is ignored. The motivation for this is that vdiffr is a monitoring tool and shouldn’t cause R CMD check failures on the CRAN machines.</p>
 <p>Checking the appearance of a figure is inherently fragile. It is a bit like testing for errors by matching exact error messages. These messages are susceptible to change at any time. Similarly, the appearance of plots depends on a lot of upstream code, such as the way margins and spacing are computed. vdiffr uses a special ggplot2 theme that should change very rarely, but there are just too many upstream factors that could cause breakages. For this reason, figure mismatches are not necessarily representative of actual failures.</p>
@@ -182,7 +184,7 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <li><p>The plot depends on some system library. For instance sf plots depend on libraries like GEOS and GDAL. It might not be possible to test these plots with vdiffr (which can still be used for manual inspection, add a [testthat::skip()] before the <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> call in that case).</p></li>
 </ul>
 <p>To help you understand the causes of a failure, vdiffr automatically logs the SVG diff of all failures when run under R CMD check. The log is located in <code>tests/vdiffr.Rout.fail</code> and should be displayed on Travis.</p>
-<p>You can also set the <code>VDIFFR_LOG_PATH</code> environment variable with <code><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv()</a></code> to unconditionally (also interactively) log failures in the file pointed by the variable.</p>
+<p>You can also set the <code>VDIFFR_LOG_PATH</code> environment variable with <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv()</a></code> to unconditionally (also interactively) log failures in the file pointed by the variable.</p>
 </div>
 <div id="implementation" class="section level2">
 <h2 class="hasAnchor">
@@ -191,7 +193,7 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <h3 class="hasAnchor">
 <a href="#testthat-reporter" class="anchor"></a>testthat Reporter</h3>
 <p>vdiffr extends testthat through a custom <code>Reporter</code>. <a href="https://github.com/hadley/testthat/blob/master/R/reporter.R">Reporters</a> are classes (R6 classes in recent versions of testthat) whose instances collect cases and output a summary of the tests. While reporters are usually meant to provide output for the end user, you can also use them in functions to interact with testthat.</p>
-<p>vdiffr has a <a href="https://github.com/r-lib/vdiffr/blob/master/R/testthat-reporter.R">special reporter</a> that does nothing but activate a collecter for the visual test cases. <code><a href="reference/collect_cases.html">collect_cases()</a></code> calls <code><a href="https://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code> with this reporter. When <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> is called, it first checks whether the case is new or failed. If that’s the case, and if it finds that vdiffr’s collecter is active, it calls the collecter, which in turns records the current test case.</p>
+<p>vdiffr has a <a href="https://github.com/r-lib/vdiffr/blob/master/R/testthat-reporter.R">special reporter</a> that does nothing but activate a collecter for the visual test cases. <code><a href="reference/collect_cases.html">collect_cases()</a></code> calls <code><a href="https://rdrr.io/pkg/devtools/man/test.html">devtools::test()</a></code> with this reporter. When <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> is called, it first checks whether the case is new or failed. If that’s the case, and if it finds that vdiffr’s collecter is active, it calls the collecter, which in turns records the current test case.</p>
 <p>This enables the user to run the tests with the usual development tools and get feedback in the form of skipped or failed cases. On the other hand, when vdiffr’s tools are called, we collect information about the tests of interest and wrap them in a data structure.</p>
 </div>
 <div id="svg-comparison" class="section level3">
@@ -253,17 +255,20 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 </div>
 </div>
 
+
       <footer><div class="copyright">
   <p>Developed by Lionel Henry, Carl Sutherland, David Hong, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

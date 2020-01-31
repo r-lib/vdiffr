@@ -131,7 +131,8 @@
     <p>Manage visual test cases with a Shiny app</p>
     </div>
 
-    <pre class="usage"><span class='fu'>manage_cases</span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
+    <pre class="usage"><span class='fu'>manage_cases</span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>invert</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>,
+  <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,8 +145,12 @@ name. See <code><a href='https://rdrr.io/pkg/devtools/man/as.package.html'>devto
     <tr>
       <th>filter</th>
       <td><p>If not <code>NULL</code>, only tests with file names matching this
-regular expression will be executed.  Matching will take on the file
+regular expression will be executed. Matching be performed on the file
 name after it has been stripped of <code>"test-"</code> and <code>".R"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>invert</th>
+      <td><p>should the regexp supplied to <code>filter</code> be inverted? Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -23,7 +23,7 @@ name. See \code{\link[devtools:as.package]{devtools::as.package()}} for more inf
 regular expression will be executed. Matching be performed on the file
 name after it has been stripped of \code{"test-"} and \code{".R"}.}
 
-\item{invert}{the regexp supplied to \code{filter}? Defaults to \code{FALSE}.}
+\item{invert}{should the regexp supplied to \code{filter} be inverted? Defaults to \code{FALSE}.}
 }
 \value{
 A \code{cases} object. \code{collect_new_cases()},

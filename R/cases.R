@@ -10,14 +10,21 @@
 #'   `collect_mismatched_cases()` and `collect_orphaned_cases()`
 #'   return a filtered `cases` object.
 #' @export
-collect_cases <- function(package = ".", filter = NULL) {
+collect_cases <- function(package = ".", filter = NULL, invert = FALSE) {
   on.exit(set_active_collecter(NULL))
 
   message("Running testthat to collect visual cases\n\n",
     "  N = New visual case\n  X = Failed doppelganger\n  o = Successful doppelganger\n")
   package <- devtools::as.package(package)
   reporter <- vdiffrReporter$new(package$path)
-  suppressMessages(devtools::test(package, filter = filter, reporter = reporter))
+  suppressMessages(
+    devtools::test(
+      package,
+      filter = filter,
+      reporter = reporter,
+      invert = invert
+    )
+  )
 
   cases <- active_collecter()$get_cases()
 

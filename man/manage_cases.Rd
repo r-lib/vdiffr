@@ -4,15 +4,18 @@
 \alias{manage_cases}
 \title{Manage visual test cases with a Shiny app}
 \usage{
-manage_cases(package = ".", filter = NULL, ..., options = list())
+manage_cases(package = ".", filter = NULL, invert = FALSE, ...,
+  options = list())
 }
 \arguments{
 \item{package}{Package description, can be path or package
 name. See \code{\link[devtools:as.package]{devtools::as.package()}} for more information.}
 
 \item{filter}{If not \code{NULL}, only tests with file names matching this
-regular expression will be executed.  Matching will take on the file
+regular expression will be executed. Matching be performed on the file
 name after it has been stripped of \code{"test-"} and \code{".R"}.}
+
+\item{invert}{the regexp supplied to \code{filter}? Defaults to \code{FALSE}.}
 
 \item{...}{Unused.}
 

@@ -7,7 +7,7 @@
 \alias{collect_orphaned_cases}
 \title{Collect cases}
 \usage{
-collect_cases(package = ".", filter = NULL)
+collect_cases(package = ".", filter = NULL, invert = FALSE)
 
 collect_new_cases(package = ".")
 
@@ -20,8 +20,10 @@ collect_orphaned_cases(package = ".")
 name. See \code{\link[devtools:as.package]{devtools::as.package()}} for more information.}
 
 \item{filter}{If not \code{NULL}, only tests with file names matching this
-regular expression will be executed.  Matching will take on the file
+regular expression will be executed. Matching be performed on the file
 name after it has been stripped of \code{"test-"} and \code{".R"}.}
+
+\item{invert}{the regexp supplied to \code{filter}? Defaults to \code{FALSE}.}
 }
 \value{
 A \code{cases} object. \code{collect_new_cases()},

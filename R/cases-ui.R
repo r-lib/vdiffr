@@ -4,11 +4,13 @@
 #' @inheritParams shiny::shinyApp
 #' @param package Package description, can be path or package
 #'   name. See [devtools::as.package()] for more information.
+#' @param invert the regexp supplied to `filter`? Defaults to `FALSE`.
 #' @param ... Unused.
 #' @seealso [vdiffrAddin()], [collect_cases()], and [validate_cases()]
 #' @export
-manage_cases <- function(package = ".", filter = NULL, ..., options = list()) {
-  cases <- collect_cases(package, filter = filter)
+manage_cases <- function(package = ".", filter = NULL,
+                         invert = FALSE, ..., options = list()) {
+  cases <- collect_cases(package, filter = filter, invert = invert)
   cases <- filter_cases(cases, c("new_case", "mismatch_case", "orphaned_case", "success_case"))
 
   vdiffrApp <- shiny::shinyApp(

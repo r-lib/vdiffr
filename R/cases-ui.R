@@ -4,7 +4,7 @@
 #' @inheritParams shiny::shinyApp
 #' @param package Package description, can be path or package
 #'   name. See [devtools::as.package()] for more information.
-#' @param invert the regexp supplied to `filter`? Defaults to `FALSE`.
+#' @param invert should the regexp supplied to `filter` be inverted? Defaults to `FALSE`.
 #' @param ... Unused.
 #' @seealso [vdiffrAddin()], [collect_cases()], and [validate_cases()]
 #' @export

@@ -42,6 +42,7 @@ Imports:
     R6,
     Rcpp,
     shiny,
+    miniUI,
     testthat (>= 1.0.0),
     usethis (>= 1.4.0),
     xml2 (>= 1.0.0)
@@ -57,7 +58,7 @@ LinkingTo:
     gdtools,
     Rcpp,
     BH
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/r-lib/vdiffr
 BugReports: https://github.com/r-lib/vdiffr/issues

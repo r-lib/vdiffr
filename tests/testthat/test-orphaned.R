@@ -1,6 +1,3 @@
-
-context("Orphaned")
-
 test_that("Orphaned figures are found", {
   orphaned <- filter_cases(mock_cases, "orphaned_case")
   expect_equal(map_chr(unname(orphaned), "name"), c("orphaned1", "orphaned2"))

@@ -1,6 +1,3 @@
-
-context("Cases")
-
 test_that("Attributes are preserved", {
   cases <- vdiffr:::cases(list(), "pkg_path", "deps")
   new_cases <- filter_cases(cases, "new")

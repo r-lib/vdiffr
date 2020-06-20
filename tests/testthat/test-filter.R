@@ -1,5 +1,3 @@
-context("Filtering")
-
 test_that("Can filter to test certain cases", {
   mock_pkg_dir <- create_mock_pkg("mock-pkg")
   mock_test_dir <- file.path(mock_pkg_dir, "tests", "testthat")

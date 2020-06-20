@@ -1,6 +1,3 @@
-
-context("Thrown error")
-
 collect_silently <- function(pkg) {
   capture.output(suppressMessages(collect_cases(pkg)))
 }

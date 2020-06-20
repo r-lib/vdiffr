@@ -1,6 +1,3 @@
-
-context("New cases")
-
 test_that("New cases are skipped", {
   new_results <- subset_results(test_results, "test-new.R", "New plots are collected")
 

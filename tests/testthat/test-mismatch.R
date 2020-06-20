@@ -1,5 +1,3 @@
-context("mismatch")
-
 test_that("failures are pushed to log file", {
   log_path <- file.path(mock_pkg_dir, "tests", "vdiffr.Rout.fail")
   if (!file.exists(log_path)) {

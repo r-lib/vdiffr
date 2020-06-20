@@ -1,6 +1,3 @@
-
-context("File comparison")
-
 write_tempfile <- function(lines) {
   path <- tempfile()
 

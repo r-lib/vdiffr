@@ -57,6 +57,8 @@ LinkingTo:
     gdtools,
     Rcpp,
     BH
+Remotes:
+    r-lib/testthat
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/r-lib/vdiffr

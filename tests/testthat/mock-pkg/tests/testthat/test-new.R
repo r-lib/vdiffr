@@ -1,5 +1,3 @@
-
-context("New plots")
 library("vdiffr")
 
 p1 <- function() plot(mtcars$disp)

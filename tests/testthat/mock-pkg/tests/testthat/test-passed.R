@@ -1,5 +1,3 @@
-
-context("Passed plots")
 library("vdiffr")
 
 test_that("ggplot doppelgangers pass", {

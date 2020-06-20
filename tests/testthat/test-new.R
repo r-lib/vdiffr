@@ -22,8 +22,8 @@ test_that("Figs are saved to alternative paths", {
 })
 
 test_that("Figs are saved in context subfolders", {
-  path1 <- file.path(mock_pkg_dir, "tests", "figs", "new-plots")
-  path2 <- file.path(mock_pkg_dir, "tests", "figs", "new-plots")
+  path1 <- file.path(mock_pkg_dir, "tests", "figs", "new")
+  path2 <- file.path(mock_pkg_dir, "tests", "figs", "new")
   expect_true(file.exists(file.path(path1, "context1.svg")))
   expect_true(file.exists(file.path(path2, "context2.svg")))
 })

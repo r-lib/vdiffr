@@ -1,6 +1,3 @@
-
-context("ggplot")
-
 test_that("ggtitle is set correctly", {
   p <- ggplot2::ggplot()
   expect_doppelganger("Some title", p)

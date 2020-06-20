@@ -63,6 +63,7 @@ vdiffrReporter <-
     public = list(
       failure = NULL,
       pkg_path = NULL,
+      file_name = "",
 
       initialize = function(pkg_path) {
         self$pkg_path <- pkg_path
@@ -95,6 +96,19 @@ vdiffrReporter <-
              * message: { self$failure$message }
              You can inspect this error with `vdiffr::last_collection_error()`"
           ))
+        }
+      },
+      
+      # Imitate testthat::ProgressReporter
+      start_file = function(file) {
+        self$file_name <- file
+      },
+      
+      start_test = function(context, test) {
+        if (is.null(context)) {
+          testthat::context(
+            testthat::context_name(self$file_name)
+          )
         }
       }
     ),

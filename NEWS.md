@@ -1,5 +1,7 @@
 
-# vdiffr 0.3.1.9000
+# vdiffr 0.3.2
+
+- Fixed CRAN checks on r-devel.
 
 - Keyboard short cuts for common interactions:
     Right/Left arrows = Next/Previous case
@@ -7,6 +9,11 @@
     ENTER = Validate active case
     shift + ENTER = Validate active group
     ESC = Quit app
+
+- Failure diffs are now logged in `vdiffr.Rout.fail` when the `CI`
+  environment variable is set. This makes it easier to investigate
+  remote failures on Travis etc (#79).
+
 
 # vdiffr 0.3.1
 

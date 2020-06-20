@@ -113,7 +113,7 @@ push_log <- function(case) {
   cat_line(file = file, "", !!!diff_lines, "")
 }
 is_checking <- function() {
-  !nzchar(Sys.getenv("NOT_CRAN"))
+  nzchar(Sys.getenv("CI")) || !nzchar(Sys.getenv("NOT_CRAN"))
 }
 
 diff_lines <- function(case,

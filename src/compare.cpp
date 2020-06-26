@@ -18,7 +18,7 @@ struct is_cr {
   }
 };
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 bool compare_files(std::string expected, std::string test) {
   std::ifstream file1(expected.c_str(), std::ifstream::ate | std::ifstream::binary);
   std::ifstream file2(test.c_str(), std::ifstream::ate | std::ifstream::binary);

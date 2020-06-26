@@ -2,7 +2,7 @@
 #include <freetypeharfbuzz.c>
 
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 SEXP library_load() {
   fthb_init();
   return R_NilValue;
@@ -30,7 +30,7 @@ int validate_string_info_inputs(SEXP* string, SEXP* font_size, SEXP* font_file) 
   return n_protect;
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 SEXP test_string_width(SEXP string, SEXP font_size, SEXP font_file) {
   int n_protect = validate_string_info_inputs(&string, &font_size, &font_file);
 
@@ -55,7 +55,7 @@ const char* string_info_names[] = {
   "width", "height", "ascent", "descent", ""
 };
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 SEXP test_string_info(SEXP string, SEXP font_size, SEXP font_file) {
   int n_protect = validate_string_info_inputs(&string, &font_size, &font_file);
 

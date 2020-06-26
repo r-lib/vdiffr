@@ -53,11 +53,13 @@ Suggests:
     withr,
     yaml
 LinkingTo:
+    cpp11,
     freetypeharfbuzz,
     gdtools,
     Rcpp,
     BH
-RoxygenNote: 6.1.1
+SystemRequirements: C++11
+RoxygenNote: 7.1.0.9000
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/r-lib/vdiffr
 BugReports: https://github.com/r-lib/vdiffr/issues

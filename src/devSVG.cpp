@@ -16,6 +16,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#include <cpp11/external_pointer.hpp>
 #include <Rcpp.h>
 #include <gdtools.h>
 #include <string>
@@ -765,7 +766,7 @@ void makeDevice(SvgStreamPtr stream, std::string bg_, double width, double heigh
   } END_SUSPEND_INTERRUPTS;
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 bool svglite_(std::string file, std::string bg, double width, double height,
               double pointsize, bool standalone, Rcpp::List aliases) {
 
@@ -775,8 +776,8 @@ bool svglite_(std::string file, std::string bg, double width, double height,
   return true;
 }
 
-// [[Rcpp::export]]
-Rcpp::XPtr<std::stringstream> svgstring_(Rcpp::Environment env, std::string bg,
+[[cpp11::register]]
+cpp11::external_pointer<std::stringstream> svgstring_(Rcpp::Environment env, std::string bg,
                                          double width, double height, double pointsize,
                                          bool standalone, Rcpp::List aliases) {
 
@@ -788,8 +789,8 @@ Rcpp::XPtr<std::stringstream> svgstring_(Rcpp::Environment env, std::string bg,
   return strstream->string_src();
 }
 
-// [[Rcpp::export]]
-std::string get_svg_content(Rcpp::XPtr<std::stringstream> p) {
+[[cpp11::register]]
+std::string get_svg_content(cpp11::external_pointer<std::stringstream> p) {
   p->flush();
   std::string svgstr = p->str();
   // If the current SVG is empty, we also make the string empty

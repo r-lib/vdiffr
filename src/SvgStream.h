@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <cpp11/external_pointer.hpp>
 #include <Rcpp.h>
 #include "utils.h"
 
@@ -113,10 +114,10 @@ public:
     env_["svg_string"] = svgstr;
   }
 
-  Rcpp::XPtr<std::stringstream> string_src() {
+  cpp11::external_pointer<std::stringstream> string_src() {
     // `false` means this pointer should not be "deleted" by R
     // The object will be automatically destroyed when device is closed
-    return Rcpp::XPtr<std::stringstream>(&stream_, false);
+    return cpp11::external_pointer<std::stringstream>(&stream_, false);
   }
 };
 

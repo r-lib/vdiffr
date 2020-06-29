@@ -17,6 +17,7 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <cpp11/external_pointer.hpp>
+#include <cpp11/list.hpp>
 #include <Rcpp.h>
 #include <gdtools.h>
 #include <string>
@@ -39,7 +40,7 @@ public:
   std::string clipid;  // ID for the clip path
   double clipx0, clipx1, clipy0, clipy1;  // Save the previous clip path to avoid duplication
   bool standalone;
-  Rcpp::List system_aliases;
+  cpp11::writable::list system_aliases;
   Rcpp::List user_aliases;
 
   SVGDesc(SvgStreamPtr stream_, bool standalone_, Rcpp::List aliases_):
@@ -594,7 +595,7 @@ void svg_text(double x, double y, const char *str, double rot,
   if (!is_black(gc->col))
     write_style_col(stream, "fill", gc->col);
 
-  std::string font_name = fontname(gc->fontfamily, gc->fontface, svgd->system_aliases, svgd->user_aliases);
+  std::string font_name = fontname(gc->fontfamily, gc->fontface, static_cast<SEXP>(svgd->system_aliases), svgd->user_aliases);
   write_style_str(stream, "font-family", font_name.c_str());
   write_style_end(stream);
 

@@ -2,12 +2,13 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <cpp11/protect.hpp>
 #include <Rcpp.h>
 
 #include "algo-it.h"
 
 int compare_throw() {
-  Rcpp::stop("vdiffr error: unable to read svg files");
+  cpp11::stop("vdiffr error: unable to read svg files");
   return 0;
 }
 

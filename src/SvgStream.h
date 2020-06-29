@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <cpp11/external_pointer.hpp>
+#include <cpp11/protect.hpp>
 #include <Rcpp.h>
 #include "utils.h"
 
@@ -47,7 +48,7 @@ public:
     stream_.open(R_ExpandFileName(path.c_str()));
 
     if (stream_.fail())
-      Rcpp::stop("cannot open stream " + path);
+      cpp11::stop("cannot open stream %s", path.c_str());
 
     stream_ << std::fixed << std::setprecision(2);
   }

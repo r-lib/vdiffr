@@ -360,7 +360,7 @@ BEGIN_RCPP
   SvgStreamPtr stream = svgd->stream;
 
   if (svgd->pageno > 0) {
-    Rcpp::stop("svglite only supports one page");
+    cpp11::stop("svglite only supports one page");
   }
 
   if (svgd->standalone)
@@ -757,7 +757,7 @@ void makeDevice(SvgStreamPtr stream, std::string bg_, double width, double heigh
     pDevDesc dev = svg_driver_new(stream, bg, width, height, pointsize,
                                   standalone, aliases);
     if (dev == NULL)
-      Rcpp::stop("Failed to start SVG device");
+      cpp11::stop("Failed to start SVG device");
 
     pGEDevDesc dd = GEcreateDevDesc(dev);
     GEaddDevice2(dd, "devSVG");

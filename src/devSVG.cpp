@@ -16,6 +16,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#include <cpp11/strings.hpp>
 #include <cpp11/external_pointer.hpp>
 #include <cpp11/list.hpp>
 #include <Rcpp.h>
@@ -43,13 +44,13 @@ public:
   cpp11::writable::list system_aliases;
   cpp11::writable::list user_aliases;
 
-  SVGDesc(SvgStreamPtr stream_, bool standalone_, Rcpp::List aliases_):
+  SVGDesc(SvgStreamPtr stream_, bool standalone_, cpp11::list aliases_):
       stream(stream_),
       pageno(0),
       clipx0(0), clipx1(0), clipy0(0), clipy1(0),
       standalone(standalone_),
-      system_aliases(Rcpp::wrap(aliases_["system"])),
-      user_aliases(Rcpp::wrap(aliases_["user"])) {
+      system_aliases(aliases_["system"]),
+      user_aliases(aliases_["user"]) {
   }
 };
 
@@ -743,7 +744,7 @@ pDevDesc svg_driver_new(SvgStreamPtr stream, int bg, double width,
   dd->haveTransparency = 2;
   dd->haveTransparentBg = 2;
 
-  dd->deviceSpecific = new SVGDesc(stream, standalone, aliases);
+  dd->deviceSpecific = new SVGDesc(stream, standalone, static_cast<SEXP>(aliases));
   return dd;
 }
 

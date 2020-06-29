@@ -62,3 +62,5 @@ RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/r-lib/vdiffr
 BugReports: https://github.com/r-lib/vdiffr/issues
+Remotes:
+    r-lib/cpp11

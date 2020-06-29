@@ -3,7 +3,6 @@
 #include <fstream>
 #include <algorithm>
 #include <cpp11/protect.hpp>
-#include <Rcpp.h>
 
 #include "algo-it.h"
 

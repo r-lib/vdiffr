@@ -8,7 +8,7 @@ write_svg(plot, file, title = "")
 }
 \arguments{
 \item{plot}{A plot object to convert to SVG. Can be a ggplot2 object,
-a \link[grDevices:recordPlot]{recorded plot}, or any object with a
+a \link[grDevices:recordplot]{recorded plot}, or any object with a
 \link[base:print]{print()} method.}
 
 \item{file}{The file to write the SVG to.}

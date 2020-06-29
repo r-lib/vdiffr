@@ -4,8 +4,13 @@
 \alias{manage_cases}
 \title{Manage visual test cases with a Shiny app}
 \usage{
-manage_cases(package = ".", filter = NULL, invert = FALSE, ...,
-  options = list())
+manage_cases(
+  package = ".",
+  filter = NULL,
+  invert = FALSE,
+  ...,
+  options = list()
+)
 }
 \arguments{
 \item{package}{Package description, can be path or package

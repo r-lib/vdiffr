@@ -19,18 +19,17 @@
 #include <cpp11/strings.hpp>
 #include <cpp11/external_pointer.hpp>
 #include <cpp11/list.hpp>
-#include <Rcpp.h>
 #include <gdtools.h>
 #include <string>
 #include <iomanip>
 #include <sstream>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <R_ext/GraphicsEngine.h>
 
 #include "SvgStream.h"
 #include "utils.h"
 
-typedef boost::shared_ptr<SvgStream> SvgStreamPtr;
+typedef std::shared_ptr<SvgStream> SvgStreamPtr;
 
 // SVG device metadata
 class SVGDesc {
@@ -76,22 +75,22 @@ inline bool is_symbol(int face) {
   return face == 5;
 }
 
-inline std::string find_alias_field(std::string& family, Rcpp::List& alias,
+inline std::string find_alias_field(std::string& family, cpp11::list& alias,
                                     const char* face, const char* field) {
-  if (alias.containsElementNamed(face)) {
-    Rcpp::List font = alias[face];
-    if (font.containsElementNamed(field))
-      return font[field];
+  if (alias[face] != R_NilValue) {
+    cpp11::list font = alias[face];
+    if (font[field] != R_NilValue)
+      return cpp11::as_cpp<std::string>(font[field]);
   }
   return std::string();
 }
 
 inline std::string find_user_alias(std::string& family,
-                                   Rcpp::List const& aliases,
+                                   cpp11::list const& aliases,
                                    int face, const char* field) {
   std::string out;
-  if (aliases.containsElementNamed(family.c_str())) {
-    Rcpp::List alias = aliases[family];
+  if (aliases[family.c_str()] != R_NilValue) {
+    cpp11::list alias (aliases[family.c_str()]);
     if (is_bolditalic(face))
       out = find_alias_field(family, alias, "bolditalic", field);
     else if (is_bold(face))
@@ -107,19 +106,19 @@ inline std::string find_user_alias(std::string& family,
 }
 
 inline std::string find_system_alias(std::string& family,
-                                     Rcpp::List const& aliases) {
+                                     cpp11::list const& aliases) {
   std::string out;
-  if (aliases.containsElementNamed(family.c_str())) {
-    SEXP alias = aliases[family];
+  if (aliases[family.c_str()] != R_NilValue) {
+    SEXP alias = aliases[family.c_str()];
     if (TYPEOF(alias) == STRSXP && Rf_length(alias) == 1)
-      out = Rcpp::as<std::string>(alias);
+      out = cpp11::as_cpp<std::string>(alias);
   }
   return out;
 }
 
 inline std::string fontname(const char* family_, int face,
-                            Rcpp::List const& system_aliases,
-                            Rcpp::List const& user_aliases) {
+                            cpp11::list const& system_aliases,
+                            cpp11::list const& user_aliases) {
   std::string family(family_);
   if (face == 5)
     family = "symbol";
@@ -137,7 +136,7 @@ inline std::string fontname(const char* family_, int face,
 }
 
 inline std::string fontfile(const char* family_, int face,
-                            Rcpp::List user_aliases) {
+                            cpp11::list user_aliases) {
   std::string family(family_);
   if (face == 5)
     family = "symbol";
@@ -679,7 +678,7 @@ void svg_raster(unsigned int *raster, int w, int h,
 
 pDevDesc svg_driver_new(SvgStreamPtr stream, int bg, double width,
                         double height, double pointsize,
-                        bool standalone, Rcpp::List& aliases) {
+                        bool standalone, cpp11::list& aliases) {
 
   pDevDesc dd = (DevDesc*) calloc(1, sizeof(DevDesc));
   if (dd == NULL)
@@ -749,7 +748,7 @@ pDevDesc svg_driver_new(SvgStreamPtr stream, int bg, double width,
 }
 
 void makeDevice(SvgStreamPtr stream, std::string bg_, double width, double height,
-                double pointsize, bool standalone, Rcpp::List& aliases) {
+                double pointsize, bool standalone, cpp11::list& aliases) {
 
   int bg = R_GE_str2col(bg_.c_str());
 
@@ -770,7 +769,7 @@ void makeDevice(SvgStreamPtr stream, std::string bg_, double width, double heigh
 
 [[cpp11::register]]
 bool svglite_(std::string file, std::string bg, double width, double height,
-              double pointsize, bool standalone, Rcpp::List aliases) {
+              double pointsize, bool standalone, cpp11::list aliases) {
 
   SvgStreamPtr stream(new SvgStreamFile(file));
   makeDevice(stream, bg, width, height, pointsize, standalone, aliases);
@@ -779,11 +778,11 @@ bool svglite_(std::string file, std::string bg, double width, double height,
 }
 
 [[cpp11::register]]
-cpp11::external_pointer<std::stringstream> svgstring_(Rcpp::Environment env, std::string bg,
+cpp11::external_pointer<std::stringstream> svgstring_(cpp11::environment env, std::string bg,
                                          double width, double height, double pointsize,
-                                         bool standalone, Rcpp::List aliases) {
+                                         bool standalone, cpp11::list aliases) {
 
-  SvgStreamPtr stream(new SvgStreamString(static_cast<SEXP>(env)));
+  SvgStreamPtr stream(new SvgStreamString(env));
   makeDevice(stream, bg, width, height, pointsize, standalone, aliases);
 
   SvgStreamString* strstream = static_cast<SvgStreamString*>(stream.get());

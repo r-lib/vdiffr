@@ -4,8 +4,14 @@
 \alias{expect_doppelganger}
 \title{Does a figure look like its expected output?}
 \usage{
-expect_doppelganger(title, fig, path = NULL, ..., verbose = NULL,
-  writer = write_svg)
+expect_doppelganger(
+  title,
+  fig,
+  path = NULL,
+  ...,
+  verbose = NULL,
+  writer = write_svg
+)
 }
 \arguments{
 \item{title}{A brief description of what is being tested in the
@@ -25,7 +31,7 @@ pass a function. This function must construct the plot and print
 it.}
 
 \item{path}{The path where the test case should be stored, relative
-to the \code{tests/figs/} folder. If \code{NULL} (the default), the current
+to the \verb{tests/figs/} folder. If \code{NULL} (the default), the current
 testthat context is used to create a subfolder. Supply an empty
 string \code{""} if you want the figures to be stored in the root
 folder.}

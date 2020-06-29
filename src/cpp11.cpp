@@ -14,17 +14,17 @@ extern "C" SEXP _vdiffr_compare_files(SEXP expected, SEXP test) {
   END_CPP11
 }
 // devSVG.cpp
-bool svglite_(std::string file, std::string bg, double width, double height, double pointsize, bool standalone, Rcpp::List aliases);
+bool svglite_(std::string file, std::string bg, double width, double height, double pointsize, bool standalone, cpp11::list aliases);
 extern "C" SEXP _vdiffr_svglite_(SEXP file, SEXP bg, SEXP width, SEXP height, SEXP pointsize, SEXP standalone, SEXP aliases) {
   BEGIN_CPP11
-    return cpp11::as_sexp(svglite_(cpp11::unmove(cpp11::as_cpp<std::string>(file)), cpp11::unmove(cpp11::as_cpp<std::string>(bg)), cpp11::unmove(cpp11::as_cpp<double>(width)), cpp11::unmove(cpp11::as_cpp<double>(height)), cpp11::unmove(cpp11::as_cpp<double>(pointsize)), cpp11::unmove(cpp11::as_cpp<bool>(standalone)), cpp11::unmove(cpp11::as_cpp<Rcpp::List>(aliases))));
+    return cpp11::as_sexp(svglite_(cpp11::unmove(cpp11::as_cpp<std::string>(file)), cpp11::unmove(cpp11::as_cpp<std::string>(bg)), cpp11::unmove(cpp11::as_cpp<double>(width)), cpp11::unmove(cpp11::as_cpp<double>(height)), cpp11::unmove(cpp11::as_cpp<double>(pointsize)), cpp11::unmove(cpp11::as_cpp<bool>(standalone)), cpp11::unmove(cpp11::as_cpp<cpp11::list>(aliases))));
   END_CPP11
 }
 // devSVG.cpp
-cpp11::external_pointer<std::stringstream> svgstring_(Rcpp::Environment env, std::string bg, double width, double height, double pointsize, bool standalone, Rcpp::List aliases);
+cpp11::external_pointer<std::stringstream> svgstring_(cpp11::environment env, std::string bg, double width, double height, double pointsize, bool standalone, cpp11::list aliases);
 extern "C" SEXP _vdiffr_svgstring_(SEXP env, SEXP bg, SEXP width, SEXP height, SEXP pointsize, SEXP standalone, SEXP aliases) {
   BEGIN_CPP11
-    return cpp11::as_sexp(svgstring_(cpp11::unmove(cpp11::as_cpp<Rcpp::Environment>(env)), cpp11::unmove(cpp11::as_cpp<std::string>(bg)), cpp11::unmove(cpp11::as_cpp<double>(width)), cpp11::unmove(cpp11::as_cpp<double>(height)), cpp11::unmove(cpp11::as_cpp<double>(pointsize)), cpp11::unmove(cpp11::as_cpp<bool>(standalone)), cpp11::unmove(cpp11::as_cpp<Rcpp::List>(aliases))));
+    return cpp11::as_sexp(svgstring_(cpp11::unmove(cpp11::as_cpp<cpp11::environment>(env)), cpp11::unmove(cpp11::as_cpp<std::string>(bg)), cpp11::unmove(cpp11::as_cpp<double>(width)), cpp11::unmove(cpp11::as_cpp<double>(height)), cpp11::unmove(cpp11::as_cpp<double>(pointsize)), cpp11::unmove(cpp11::as_cpp<bool>(standalone)), cpp11::unmove(cpp11::as_cpp<cpp11::list>(aliases))));
   END_CPP11
 }
 // devSVG.cpp

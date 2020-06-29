@@ -40,7 +40,6 @@ Imports:
     purrr (>= 0.2.0),
     rlang,
     R6,
-    Rcpp,
     shiny,
     testthat (>= 1.0.0),
     usethis (>= 1.4.0),
@@ -59,7 +58,7 @@ LinkingTo:
     Rcpp,
     BH
 SystemRequirements: C++11
-RoxygenNote: 7.1.0.9000
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/r-lib/vdiffr
 BugReports: https://github.com/r-lib/vdiffr/issues

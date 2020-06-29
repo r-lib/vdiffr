@@ -781,7 +781,7 @@ cpp11::external_pointer<std::stringstream> svgstring_(Rcpp::Environment env, std
                                          double width, double height, double pointsize,
                                          bool standalone, Rcpp::List aliases) {
 
-  SvgStreamPtr stream(new SvgStreamString(env));
+  SvgStreamPtr stream(new SvgStreamString(static_cast<SEXP>(env)));
   makeDevice(stream, bg, width, height, pointsize, standalone, aliases);
 
   SvgStreamString* strstream = static_cast<SvgStreamString*>(stream.get());

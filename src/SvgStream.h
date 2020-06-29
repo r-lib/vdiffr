@@ -5,7 +5,7 @@
 #include <sstream>
 #include <cpp11/external_pointer.hpp>
 #include <cpp11/protect.hpp>
-#include <Rcpp.h>
+#include <cpp11/environment.hpp>
 #include "utils.h"
 
 class SvgStream {
@@ -81,10 +81,10 @@ public:
 
 class SvgStreamString : public SvgStream {
   std::stringstream stream_;
-  Rcpp::Environment env_;
+  cpp11::environment env_;
 
 public:
-  SvgStreamString(Rcpp::Environment env): env_(env) {
+  SvgStreamString(cpp11::environment env): env_(env) {
     stream_ << std::fixed << std::setprecision(2);
     env_["is_closed"] = false;
   }

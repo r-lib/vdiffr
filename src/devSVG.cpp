@@ -41,7 +41,7 @@ public:
   double clipx0, clipx1, clipy0, clipy1;  // Save the previous clip path to avoid duplication
   bool standalone;
   cpp11::writable::list system_aliases;
-  Rcpp::List user_aliases;
+  cpp11::writable::list user_aliases;
 
   SVGDesc(SvgStreamPtr stream_, bool standalone_, Rcpp::List aliases_):
       stream(stream_),
@@ -311,7 +311,7 @@ void svg_metric_info(int c, const pGEcontext gc, double* ascent,
     str[1] = '\0';
   }
 
-  std::string font_file = fontfile(gc->fontfamily, gc->fontface, svgd->user_aliases);
+  std::string font_file = fontfile(gc->fontfamily, gc->fontface, static_cast<SEXP>(svgd->user_aliases));
   double font_size = gc->cex * gc->ps;
   struct fthb_string_info metrics = { 0 };
 
@@ -512,7 +512,7 @@ void svg_path(double *x, double *y,
 double svg_strwidth(const char *str, const pGEcontext gc, pDevDesc dd) {
   SVGDesc *svgd = (SVGDesc*) dd->deviceSpecific;
 
-  std::string font_file = fontfile(gc->fontfamily, gc->fontface, svgd->user_aliases);
+  std::string font_file = fontfile(gc->fontfamily, gc->fontface, static_cast<SEXP>(svgd->user_aliases));
   double font_size = gc->cex * gc->ps;
   double string_width = 0.0;
 
@@ -595,13 +595,13 @@ void svg_text(double x, double y, const char *str, double rot,
   if (!is_black(gc->col))
     write_style_col(stream, "fill", gc->col);
 
-  std::string font_name = fontname(gc->fontfamily, gc->fontface, static_cast<SEXP>(svgd->system_aliases), svgd->user_aliases);
+  std::string font_name = fontname(gc->fontfamily, gc->fontface, static_cast<SEXP>(svgd->system_aliases), static_cast<SEXP>(svgd->user_aliases));
   write_style_str(stream, "font-family", font_name.c_str());
   write_style_end(stream);
 
   double string_width = 0.0;
 
-  std::string font_file = fontfile(gc->fontfamily, gc->fontface, svgd->user_aliases);
+  std::string font_file = fontfile(gc->fontfamily, gc->fontface, static_cast<SEXP>(svgd->user_aliases));
   fthb_calc_string_width(str, font_file.c_str(), fontsize, &string_width);
 
   (*stream) << " textLength='" << string_width << "px'";

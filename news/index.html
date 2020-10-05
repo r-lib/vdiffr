@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vdiffr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9000</span>
       </span>
     </div>
 
@@ -128,9 +128,14 @@
       <small>Source: <a href='https://github.com/r-lib/vdiffr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="vdiffr-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#vdiffr-development-version" class="anchor"></a>vdiffr (development version)<small> Unreleased </small>
+</h1>
+</div>
     <div id="vdiffr-0-3-2" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.2">
-<a href="#vdiffr-0-3-2" class="anchor"></a>vdiffr 0.3.2<small> Unreleased </small>
+<a href="#vdiffr-0-3-2" class="anchor"></a>vdiffr 0.3.2<small> 2020-06-06 </small>
 </h1>
 <ul>
 <li><p>Fixed CRAN checks on r-devel.</p></li>
@@ -179,7 +184,7 @@
 <ul>
 <li><p>vdiffr now advises user to run <code><a href="../reference/manage_cases.html">manage_cases()</a></code> when a figure was not validated yet (<a href='https://github.com/r-lib/vdiffr/issues/25'>#25</a>).</p></li>
 <li><p>Fixed a bug in the Shiny app that prevented SVGs from being displayed in Firefox (<a href='https://github.com/KZARCA'>@KZARCA</a>, <a href='https://github.com/r-lib/vdiffr/issues/29'>#29</a>).</p></li>
-<li><p><code><a href="../reference/manage_cases.html">manage_cases()</a></code> gains an <code>options</code> argument that is passed to <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyApp()</a></code> (<a href='https://github.com/KZARCA'>@KZARCA</a>).</p></li>
+<li><p><code><a href="../reference/manage_cases.html">manage_cases()</a></code> gains an <code>options</code> argument that is passed to <code><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html">shiny::shinyApp()</a></code> (<a href='https://github.com/KZARCA'>@KZARCA</a>).</p></li>
 <li><p>The Shiny app now has a quit button (<a href='https://github.com/ilarischeinin'>@ilarischeinin</a>).</p></li>
 <li><p>New <code>VDIFFR_LOG_PATH</code> environment variable. When set, vdiffr pushes diffs of failed SVG comparisons to that file.</p></li>
 <li><p><code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> now takes a <code>writer</code> argument. This makes it easy to use vdiffr with a different SVG engine. See <code><a href="../reference/write_svg.html">?write_svg</a></code> for an example function. Packages implementing a different SVG engine should wrap around <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> to pass their custom writer.</p></li>
@@ -279,7 +284,7 @@
 <li><p>Generated SVGs are now reproducible across platforms thanks to recent versions of svglite, gdtools, and the new package fontquiver. vdiffr now requires versions of FreeType greater than 2.6.1.</p></li>
 <li><p>The figures folder is hardcoded to <code>tests/figs/</code>.</p></li>
 <li><p>The figures are now stored in subfolders according to the current testthat context. <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> accepts the <code>path</code> argument to bypass this behaviour (set it to <code>""</code> to store the figures in <code>tests/figs/</code>).</p></li>
-<li><p>The <code>title</code> argument of <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> now serves as <code>ggtitle()</code> in ggplot2 figures (unless a title is already set). It is also standardised and used as filename to store the figure (spaces and non-alphanumeric characters are converted to dashes).</p></li>
+<li><p>The <code>title</code> argument of <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> now serves as <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle()</a></code> in ggplot2 figures (unless a title is already set). It is also standardised and used as filename to store the figure (spaces and non-alphanumeric characters are converted to dashes).</p></li>
 <li><p>Add support for handling orphaned cases: you can now remove figures left over from deleted tests with <code><a href="../reference/validate_cases.html">delete_orphaned_cases()</a></code> or from the Shiny app.</p></li>
 <li><p>New <code>filter</code> argument to <code><a href="../reference/collect_cases.html">collect_cases()</a></code> and <code><a href="../reference/manage_cases.html">manage_cases()</a></code>. This lets you filter the test files from which to collect the cases, which is useful to speed up the collection for large codebases with a lot of unit tests.</p></li>
 <li><p>Fix invalid generation of SVG files (<a href='https://github.com/r-lib/vdiffr/issues/3'>#3</a>)</p></li>
@@ -310,7 +315,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

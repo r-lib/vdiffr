@@ -73,7 +73,7 @@ Markdown document or Shiny application." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vdiffr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2.9000</span>
       </span>
     </div>
 
@@ -136,17 +136,17 @@ Markdown document or Shiny application." />
 Markdown document or Shiny application.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>widget_toggle_</span>(<span class='no'>before</span>, <span class='no'>after</span>, <span class='no'>...</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>widget_toggle_</span><span class='op'>(</span><span class='va'>before</span>, <span class='va'>after</span>, <span class='va'>...</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, height <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>widget_slide_</span>(<span class='no'>before</span>, <span class='no'>after</span>, <span class='no'>...</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>widget_slide_</span><span class='op'>(</span><span class='va'>before</span>, <span class='va'>after</span>, <span class='va'>...</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, height <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>widget_diff_</span>(<span class='no'>before</span>, <span class='no'>after</span>, <span class='no'>...</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>widget_diff_</span><span class='op'>(</span><span class='va'>before</span>, <span class='va'>after</span>, <span class='va'>...</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, height <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>widget_toggle</span>(<span class='no'>before</span>, <span class='no'>after</span>, <span class='no'>...</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>widget_toggle</span><span class='op'>(</span><span class='va'>before</span>, <span class='va'>after</span>, <span class='va'>...</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, height <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>widget_slide</span>(<span class='no'>before</span>, <span class='no'>after</span>, <span class='no'>...</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>widget_slide</span><span class='op'>(</span><span class='va'>before</span>, <span class='va'>after</span>, <span class='va'>...</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, height <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>widget_diff</span>(<span class='no'>before</span>, <span class='no'>after</span>, <span class='no'>...</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>widget_diff</span><span class='op'>(</span><span class='va'>before</span>, <span class='va'>after</span>, <span class='va'>...</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, height <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,14 +187,15 @@ can be paths to SVG files or inlined SVG images. Currently,
 <code>widget_diff_()</code> is compatible only with inlined images.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>mtcars</span>$<span class='no'>disp</span>)
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>mtcars</span>$<span class='no'>drat</span>)
+    <pre class="examples"><div class='input'><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>disp</span><span class='op'>)</span>
+<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>drat</span><span class='op'>)</span>
 
 <span class='co'># You can also call these functions in a R Markdown document or</span>
 <span class='co'># in a Shiny application:</span>
-<span class='fu'>widget_toggle</span>(<span class='no'>p1</span>, <span class='no'>p2</span>)
-<span class='fu'>widget_slide</span>(<span class='no'>p1</span>, <span class='no'>p2</span>)
-<span class='fu'>widget_diff</span>(<span class='no'>p1</span>, <span class='no'>p2</span>)</div></pre>
+<span class='fu'>widget_toggle</span><span class='op'>(</span><span class='va'>p1</span>, <span class='va'>p2</span><span class='op'>)</span>
+<span class='fu'>widget_slide</span><span class='op'>(</span><span class='va'>p1</span>, <span class='va'>p2</span><span class='op'>)</span>
+<span class='fu'>widget_diff</span><span class='op'>(</span><span class='va'>p1</span>, <span class='va'>p2</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -210,7 +211,7 @@ can be paths to SVG files or inlined SVG images. Currently,
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

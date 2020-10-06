@@ -132,7 +132,7 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <a href="#managing-the-tests" class="anchor"></a>Managing the tests</h3>
 <p>When you have added new test cases or detected regressions, you can manage those from the R command line with the functions <code><a href="reference/collect_cases.html">collect_cases()</a></code>, <code><a href="reference/validate_cases.html">validate_cases()</a></code>, and <code><a href="reference/validate_cases.html">delete_orphaned_cases()</a></code>. However it’s easier to run the shiny application <code><a href="reference/manage_cases.html">manage_cases()</a></code>. With this app you can:</p>
 <ul>
-<li><p>Check how a failed case differs from its expected output using three widgets: Toggle (click to swap the images), Slide and Diff. If you use Github, you may be familiar with <a href="https://github.com/blog/817-behold-image-view-modes">the last two</a>.</p></li>
+<li><p>Check how a failed case differs from its expected output using three widgets: Toggle (click to swap the images), Slide and Diff.</p></li>
 <li><p>Validate cases. You can do so groupwise (all new cases or all failed cases) or on a case by case basis. When you validate a failed case, the old expected output is replaced by the new one.</p></li>
 <li><p>Delete orphaned cases. During a refactoring of your unit tests, some visual expectations may be removed or renamed. This means that some unused figures will linger in the <code>tests/figs/</code> folder. These figures appear in the Shiny application under the category “Orphaned” and can be cleaned up from there.</p></li>
 </ul>

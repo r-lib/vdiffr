@@ -41,7 +41,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -69,7 +69,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-lib/vdiffr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -167,12 +167,12 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <h3 class="hasAnchor">
 <a href="#ess-integration" class="anchor"></a>ESS integration</h3>
 <p>To use the Shiny app as part of ESS devtools integration with <code>C-c C-w C-v</code>, include something like this in your init file:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><a class="sourceLine" id="cb4-1" data-line-number="1">(<span class="kw">defun</span><span class="fu"> ess-r-vdiffr-manage-cases </span>()</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">  (interactive)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  (ess-r-package-send-process <span class="st">"vdiffr::manage_cases(%s)</span><span class="sc">\n</span><span class="st">"</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">                              <span class="st">"Manage vdiffr cases for %s"</span>))</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">(define-key ess-r-package-dev-map <span class="st">"\C-v"</span> 'ess-r-vdiffr-manage-cases)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb4-1"><a href="#cb4-1"></a>(<span class="kw">defun</span><span class="fu"> ess-r-vdiffr-manage-cases </span>()</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  (interactive)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  (ess-r-package-send-process <span class="st">"vdiffr::manage_cases(%s)</span><span class="sc">\n</span><span class="st">"</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>                              <span class="st">"Manage vdiffr cases for %s"</span>))</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>(define-key ess-r-package-dev-map <span class="st">"\C-v"</span> 'ess-r-vdiffr-manage-cases)</span></code></pre></div>
 </div>
 </div>
 <div id="debugging" class="section level2">
@@ -220,9 +220,8 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> | file <a href="LICENSE-text.html">LICENSE</a>
-</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="developers">
@@ -246,8 +245,7 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/r-lib/vdiffr"><img src="https://travis-ci.org/r-lib/vdiffr.svg?branch=master" alt="Travis Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/r-lib/vdiffr"><img src="https://ci.appveyor.com/api/projects/status/github/r-lib/vdiffr?branch=master&amp;svg=true" alt="AppVeyor Build status"></a></li>
+<li><a href="https://github.com/r-lib/vdiffr/actions"><img src="https://github.com/r-lib/vdiffr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/gh/r-lib/vdiffr?branch=master"><img src="https://codecov.io/gh/r-lib/vdiffr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://cran.r-project.org/package=vdiffr"><img src="https://www.r-pkg.org/badges/version/vdiffr" alt="CRAN status"></a></li>
 </ul>

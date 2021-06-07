@@ -79,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,7 +107,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/vdiffr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,19 +132,22 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#vdiffr-development-version" class="anchor"></a>vdiffr (development version)<small> Unreleased </small>
 </h1>
+<ul>
+<li>vdiffr is now licensed as MIT (<a href='https://github.com/r-lib/vdiffr/issues/95'>#95</a>).</li>
+</ul>
 </div>
-    <div id="vdiffr-0-3-3" class="section level1">
+    <div id="vdiffr-033" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.3">
-<a href="#vdiffr-0-3-3" class="anchor"></a>vdiffr 0.3.3<small> 2020-10-06 </small>
+<a href="#vdiffr-033" class="anchor"></a>vdiffr 0.3.3<small> 2020-10-06 </small>
 </h1>
 <ul>
 <li>Compatibility with r-devel (<a href='https://github.com/pmur002'>@pmur002</a>).</li>
 <li>Compatibility with testthat 3.</li>
 </ul>
 </div>
-    <div id="vdiffr-0-3-2" class="section level1">
+    <div id="vdiffr-032" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.2">
-<a href="#vdiffr-0-3-2" class="anchor"></a>vdiffr 0.3.2<small> 2020-06-06 </small>
+<a href="#vdiffr-032" class="anchor"></a>vdiffr 0.3.2<small> 2020-06-06 </small>
 </h1>
 <ul>
 <li><p>Fixed CRAN checks on r-devel.</p></li>
@@ -152,9 +155,9 @@
 <li><p>Failure diffs are now logged in <code>vdiffr.Rout.fail</code> when the <code>CI</code> environment variable is set. This makes it easier to investigate remote failures on Travis etc (<a href='https://github.com/r-lib/vdiffr/issues/79'>#79</a>).</p></li>
 </ul>
 </div>
-    <div id="vdiffr-0-3-1" class="section level1">
+    <div id="vdiffr-031" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.1">
-<a href="#vdiffr-0-3-1" class="anchor"></a>vdiffr 0.3.1<small> 2019-06-24 </small>
+<a href="#vdiffr-031" class="anchor"></a>vdiffr 0.3.1<small> 2019-06-24 </small>
 </h1>
 <p>This release makes vdiffr compatible with ggplot2 3.2.0. It also features two contributions from the Tidyverse developer day in Austin:</p>
 <ul>
@@ -163,9 +166,9 @@
 </ul>
 <p>Finally, it fixes warnings in non-UTF-8 MBCS locale (<a href='https://github.com/r-lib/vdiffr/issues/59'>#59</a>, <a href='https://github.com/yutannihilation'>@yutannihilation</a>).</p>
 </div>
-    <div id="vdiffr-0-3-0" class="section level1">
+    <div id="vdiffr-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#vdiffr-0-3-0" class="anchor"></a>vdiffr 0.3.0<small> 2019-01-02 </small>
+<a href="#vdiffr-030" class="anchor"></a>vdiffr 0.3.0<small> 2019-01-02 </small>
 </h1>
 <p>This release of vdiffr features a major overhaul of the internals to make the package more robust.</p>
 <div id="cross-platform-reliability" class="section level2">
@@ -193,7 +196,7 @@
 <ul>
 <li><p>vdiffr now advises user to run <code><a href="../reference/manage_cases.html">manage_cases()</a></code> when a figure was not validated yet (<a href='https://github.com/r-lib/vdiffr/issues/25'>#25</a>).</p></li>
 <li><p>Fixed a bug in the Shiny app that prevented SVGs from being displayed in Firefox (<a href='https://github.com/KZARCA'>@KZARCA</a>, <a href='https://github.com/r-lib/vdiffr/issues/29'>#29</a>).</p></li>
-<li><p><code><a href="../reference/manage_cases.html">manage_cases()</a></code> gains an <code>options</code> argument that is passed to <code><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html">shiny::shinyApp()</a></code> (<a href='https://github.com/KZARCA'>@KZARCA</a>).</p></li>
+<li><p><code><a href="../reference/manage_cases.html">manage_cases()</a></code> gains an <code>options</code> argument that is passed to <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyApp()</a></code> (<a href='https://github.com/KZARCA'>@KZARCA</a>).</p></li>
 <li><p>The Shiny app now has a quit button (<a href='https://github.com/ilarischeinin'>@ilarischeinin</a>).</p></li>
 <li><p>New <code>VDIFFR_LOG_PATH</code> environment variable. When set, vdiffr pushes diffs of failed SVG comparisons to that file.</p></li>
 <li><p><code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> now takes a <code>writer</code> argument. This makes it easy to use vdiffr with a different SVG engine. See <code><a href="../reference/write_svg.html">?write_svg</a></code> for an example function. Packages implementing a different SVG engine should wrap around <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> to pass their custom writer.</p></li>
@@ -214,21 +217,22 @@
 </ul>
 </div>
 </div>
-    <div id="vdiffr-0-2-3" class="section level1">
+    <div id="vdiffr-023" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.3">
-<a href="#vdiffr-0-2-3" class="anchor"></a>vdiffr 0.2.3<small> 2018-04-27 </small>
+<a href="#vdiffr-023" class="anchor"></a>vdiffr 0.2.3<small> 2018-04-27 </small>
 </h1>
 <ul>
-<li>Maintenance release to fix CRAN errors. Thanks to Gregory R. Warnes
+<li>
+<p>Maintenance release to fix CRAN errors. Thanks to Gregory R. Warnes</p>
 <p>(<a href='https://github.com/gwarnes-mdsol'>@gwarnes-mdsol</a>) and Hiroaki Yutani (<a href='https://github.com/yutannihilation'>@yutannihilation</a>) for helping out with this!</p>
 <p>I’m working on embedding svglite in vdiffr and compiling statically to FreeType and Harfbuzz to make SVG generation deterministic across platforms. Until then vdiffr will remain a bit unstable (but should silently fail if dependencies have diverged).</p>
 </li>
 <li><p>Use <code><a href="../reference/last_collection_error.html">last_collection_error()</a></code> to print a testthat error that occurred while collecting the test cases.</p></li>
 </ul>
 </div>
-    <div id="vdiffr-0-2-2" class="section level1">
+    <div id="vdiffr-022" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.2">
-<a href="#vdiffr-0-2-2" class="anchor"></a>vdiffr 0.2.2<small> 2018-02-01 </small>
+<a href="#vdiffr-022" class="anchor"></a>vdiffr 0.2.2<small> 2018-02-01 </small>
 </h1>
 <ul>
 <li>
@@ -237,9 +241,9 @@
 </li>
 </ul>
 </div>
-    <div id="vdiffr-0-2-1" class="section level1">
+    <div id="vdiffr-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
-<a href="#vdiffr-0-2-1" class="anchor"></a>vdiffr 0.2.1<small> 2017-10-09 </small>
+<a href="#vdiffr-021" class="anchor"></a>vdiffr 0.2.1<small> 2017-10-09 </small>
 </h1>
 <p>This release fixes some CRAN failures.</p>
 <ul>
@@ -247,9 +251,9 @@
 <li><p>The unit test log file from the mock package is now preserved.</p></li>
 </ul>
 </div>
-    <div id="vdiffr-0-2-0" class="section level1">
+    <div id="vdiffr-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#vdiffr-0-2-0" class="anchor"></a>vdiffr 0.2.0<small> 2017-08-03 </small>
+<a href="#vdiffr-020" class="anchor"></a>vdiffr 0.2.0<small> 2017-08-03 </small>
 </h1>
 <p>This release makes it easier to debug failures on remote systems. It also makes vdiffr more robust to failures caused by incompatible installations: instead of failing, the tests are skipped. This prevents spurious failures on CRAN.</p>
 <div id="troubleshooting-on-remotes" class="section level2">
@@ -275,9 +279,9 @@
 </ul>
 </div>
 </div>
-    <div id="vdiffr-0-1-1" class="section level1">
+    <div id="vdiffr-011" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.1">
-<a href="#vdiffr-0-1-1" class="anchor"></a>vdiffr 0.1.1<small> 2016-11-15 </small>
+<a href="#vdiffr-011" class="anchor"></a>vdiffr 0.1.1<small> 2016-11-15 </small>
 </h1>
 <ul>
 <li><p><code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> no longer throws an error when FreeType is too old. Instead, the test is skipped. This ensures that R CMD check passes on those platforms (e.g., CRAN’s Solaris test server).</p></li>
@@ -285,9 +289,9 @@
 <li><p><code><a href="../reference/htmlwidgets.html">widget_toggle()</a></code>, <code><a href="../reference/htmlwidgets.html">widget_slide()</a></code> and <code><a href="../reference/htmlwidgets.html">widget_diff()</a></code> now take plots as arguments. This makes it easy to embed a vdiffr widget in R Markdown documents. The underscored versions take HTML sources as argument (paths to SVG files or inline SVGs).</p></li>
 </ul>
 </div>
-    <div id="vdiffr-0-1-0" class="section level1">
+    <div id="vdiffr-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
-<a href="#vdiffr-0-1-0" class="anchor"></a>vdiffr 0.1.0<small> 2016-11-08 </small>
+<a href="#vdiffr-010" class="anchor"></a>vdiffr 0.1.0<small> 2016-11-08 </small>
 </h1>
 <ul>
 <li><p>Generated SVGs are now reproducible across platforms thanks to recent versions of svglite, gdtools, and the new package fontquiver. vdiffr now requires versions of FreeType greater than 2.6.1.</p></li>
@@ -301,9 +305,9 @@
 <li><p>Remove CR line endings before comparing svg files for compatibility with Windows</p></li>
 </ul>
 </div>
-    <div id="vdiffr-0-0-0-9000" class="section level1">
+    <div id="vdiffr-0009000" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.0.9000">
-<a href="#vdiffr-0-0-0-9000" class="anchor"></a>vdiffr 0.0.0.9000<small> Unreleased </small>
+<a href="#vdiffr-0009000" class="anchor"></a>vdiffr 0.0.0.9000<small> Unreleased </small>
 </h1>
 <p>Initial release</p>
 </div>

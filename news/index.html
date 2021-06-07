@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vdiffr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -128,12 +128,20 @@
       <small>Source: <a href='https://github.com/r-lib/vdiffr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="vdiffr-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#vdiffr-development-version" class="anchor"></a>vdiffr (development version)<small> Unreleased </small>
+    <div id="vdiffr-040" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#vdiffr-040" class="anchor"></a>vdiffr 0.4.0<small> Unreleased </small>
 </h1>
+<p>This is a github-only release that is meant to help you migrate from vdiffr 0.3.x to vdiffr 1.0.0. The 1.0 release of vdiffr includes two major changes. It switches to testthat 3e for snapshot management and it uses an updated SVG engine for the generation of snapshots. The github-only 0.4.0 release only includes the new SVG engine to make it easy to compare cases with <code><a href="../reference/manage_cases.html">manage_cases()</a></code>.</p>
+<p>This intermediate step in the migration of snapshots is optional. You can also choose to update directly with the 1.0.0 release but you won’t be able to compare the new snapshots to your old ones.</p>
+<p>Note that smaller points are expected in the new snapshots because of a bugfix.</p>
 <ul>
-<li>vdiffr is now licensed as MIT (<a href='https://github.com/r-lib/vdiffr/issues/95'>#95</a>).</li>
+<li><p>Following an update to the graphics engine of R 4.1.0 that causes spurious failures due to subtle changes in graphics generation, vdiffr snapshots are now skipped on old versions of R. The plots are still generated on all versions so any errors during plot drawing will be detected by testthat.</p></li>
+<li>
+<p>The SVG generation engine of vdiffr has been updated (<a href='https://github.com/thomasp85'>@thomasp85</a>). Font sizes are now precomputed for the first 50000 unicode points. This allows deterministic computation of text box extents without the freetype and harfbuzz dependencies.</p>
+<p>Note: The main visible change of this update is that points now look smaller. Points generated with the previous SVG engine were too large.</p>
+</li>
+<li><p>vdiffr is now licensed as MIT (<a href='https://github.com/r-lib/vdiffr/issues/95'>#95</a>).</p></li>
 </ul>
 </div>
     <div id="vdiffr-033" class="section level1">

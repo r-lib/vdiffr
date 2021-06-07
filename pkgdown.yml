@@ -2,7 +2,7 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-06-07T08:26Z
+last_built: 2021-06-07T08:54Z
 urls:
   reference: https://vdiffr.r-lib.org/reference
   article: https://vdiffr.r-lib.org/articles

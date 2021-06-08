@@ -90,24 +90,14 @@
 <a href="#vdiffr" class="anchor"></a>vdiffr</h1></div>
 <!-- badges: start -->
 
-<p>vdiffr is an extension to the package testthat that makes it easy to test for visual regressions. It provides a Shiny app to manage failed tests and visually compare a graphic to its expected output.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>Get the development version from github with:</p>
-<pre class="{r}"><code><a href="https://remotes.r-lib.org/reference/install_github.html"># install.packages("remotes")
-remotes::install_github("r-lib/vdiffr")</a></code></pre>
-<p>or the last CRAN release with:</p>
-<pre class="{r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("vdiffr")</a></code></pre>
-</div>
+<p>vdiffr is a testthat extension for monitoring the appearance of R plots. It generates reproducible SVG files and registers them as the <a href="https://testthat.r-lib.org/articles/snapshotting.html">testthat snapshots</a>.</p>
 <div id="how-to-use-vdiffr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-to-use-vdiffr" class="anchor"></a>How to use vdiffr</h2>
-<p>Getting started with vdiffr is a three step process:</p>
-<p>1) Add expectations to by including <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> in your test files.</p>
-<p>1) Run <code><a href="reference/manage_cases.html">manage_cases()</a></code> to generate the plots which vdiffr will test against in the future. This will launch a shiny gadget which will ask you to confirm that each plot is correct.</p>
-<p>1) Run <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test()</a></code> to execute the tests as normal.</p>
-<p>When a figure doesn’t matched the saved version, vdiffr signals a failure when it is run interactively, or when it is run on Travis or Appveyor. Mismatches do not cause R CMD check to fail on CRAN machines. See the testing versus monitoring section below.</p>
+<p>1) Add graphical expectations by including <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> in your test files.</p>
+<p>1) Run <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test()</a></code>.</p>
+<p>1) If <code>test()</code> detected new snapshots or changes to existing snapshots, run <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html">testthat::snapshot_review()</a></code> to review them.</p>
+<p>There may be many reasons for a snapshot to fail. Upstream changes (e.g. to the R graphics engine or to ggplot2) may cause subtle differences in your plots that are not actual failures. For this reason, snapshots do not cause failures on CRAN by default. You will only see failures locally or on CI platforms such as Github Actions.</p>
 <div id="adding-expectations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-expectations" class="anchor"></a>Adding expectations</h3>
@@ -115,91 +105,25 @@ remotes::install_github("r-lib/vdiffr")</a></code></pre>
 <ul>
 <li><p>A title. This title is used in two ways. First, the title is standardised (it is converted to lowercase and any character that is not alphanumeric or a space is turned into a dash) and used as filename for storing the figure. Secondly, with ggplot2 figures the title is automatically added to the plot with <code>ggtitle()</code> (only if no ggtitle has been set).</p></li>
 <li><p>A figure. This can be a ggplot object, a recordedplot, a function to be called, or more generally any object with a <code>print</code> method.</p></li>
-<li><p>Optionally, a path where to store the figures, relative to <code>tests/figs/</code>. They are stored in a subfolder according to the current testthat context by default. Supply <code>path</code> to change the subfolder.</p></li>
 </ul>
-<p>For example, the following tests will create figures in <code>tests/figs/histograms/</code> called <code>base-graphics-histogram.svg</code> and <code>ggplot2-histogram.svg</code>:</p>
-<pre class="{r}"><code>context("Histograms")
-
-disp_hist_base &lt;- function() hist(mtcars$disp)
+<p>The snapshots are recorded in subfolders of the <code>_snaps/</code> directory.</p>
+<pre class="{r}"><code>disp_hist_base &lt;- function() hist(mtcars$disp)
 disp_hist_ggplot &lt;- ggplot(mtcars, aes(disp)) + geom_histogram()
 
 vdiffr::expect_doppelganger("Base graphics histogram", disp_hist_base)
 vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <p>Note that in addition to automatic ggtitles, ggplot2 figures are assigned the minimalistic theme <code>theme_test()</code> (unless they already have been assigned a theme).</p>
 </div>
-<div id="managing-the-tests" class="section level3">
+<div id="debugging" class="section level3">
 <h3 class="hasAnchor">
-<a href="#managing-the-tests" class="anchor"></a>Managing the tests</h3>
-<p>When you have added new test cases or detected regressions, you can manage those from the R command line with the functions <code><a href="reference/collect_cases.html">collect_cases()</a></code>, <code><a href="reference/validate_cases.html">validate_cases()</a></code>, and <code><a href="reference/validate_cases.html">delete_orphaned_cases()</a></code>. However it’s easier to run the shiny application <code><a href="reference/manage_cases.html">manage_cases()</a></code>. With this app you can:</p>
-<ul>
-<li><p>Check how a failed case differs from its expected output using three widgets: Toggle (click to swap the images), Slide and Diff.</p></li>
-<li><p>Validate cases. You can do so groupwise (all new cases or all failed cases) or on a case by case basis. When you validate a failed case, the old expected output is replaced by the new one.</p></li>
-<li><p>Delete orphaned cases. During a refactoring of your unit tests, some visual expectations may be removed or renamed. This means that some unused figures will linger in the <code>tests/figs/</code> folder. These figures appear in the Shiny application under the category “Orphaned” and can be cleaned up from there.</p></li>
-</ul>
-<p>Both <code><a href="reference/manage_cases.html">manage_cases()</a></code> and <code><a href="reference/collect_cases.html">collect_cases()</a></code> take <code>package</code> as first argument, the path to your package sources. This argument has exactly the same semantics as in devtools. You can use vdiffr tools the same way as you would use <code><a href="https://devtools.r-lib.org//reference/check.html">devtools::check()</a></code>, for example. The default is <code>"."</code>, meaning that the package is expected to be found in the current folder.</p>
-<p>All validated cases are stored in <code>tests/figs/</code>. This folder may be handy to showcase the different graphs offered in your package. You can also keep track of how your plots change as you tweak their layout and add features by checking the history on Github.</p>
-</div>
-<div id="running-tests" class="section level3">
-<h3 class="hasAnchor">
-<a href="#running-tests" class="anchor"></a>Running tests</h3>
-<p>You can run the tests the usual way, for example with <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test()</a></code>. New cases for which you just wrote an expectation will be skipped. Failed tests will show as an error.</p>
-</div>
-<div id="testing-versus-monitoring" class="section level3">
-<h3 class="hasAnchor">
-<a href="#testing-versus-monitoring" class="anchor"></a>Testing versus Monitoring</h3>
-<p>When a figure doesn’t match its saved version, it is only reported as a failure under these circumstances:</p>
-<ul>
-<li><p>When the <code>NOT_CRAN</code> environment variable is set. In particular, devtools sets this when running the tests interactively.</p></li>
-<li><p>On Travis, Appveyor, or any environment where <code><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv("CI")</a></code> is set.</p></li>
-</ul>
-<p>Otherwise, the failure is ignored. The motivation for this is that vdiffr is a monitoring tool and shouldn’t cause R CMD check failures on the CRAN machines.</p>
-<p>Checking the appearance of a figure is inherently fragile. It is a bit like testing for errors by matching exact error messages. These messages are susceptible to change at any time. Similarly, the appearance of plots depends on a lot of upstream code, such as the way margins and spacing are computed. vdiffr uses a special ggplot2 theme that should change very rarely, but there are just too many upstream factors that could cause breakages. For this reason, figure mismatches are not necessarily representative of actual failures.</p>
-<p>Visual testing is not an alternative to writing unit tests for the internal data transformations performed during the creation of your figure. It is more of a monitoring tool that allows you to quickly check how the appearance of your figures changes over time, and to manually assess whether changes reflect actual problems in your packages.</p>
-<p>If you need to override the default vdiffr behaviour on CRAN (not recommended) or Travis (for example to run the tests in a particular builds but not others), set the <code>VDIFFR_RUN_TESTS</code> environment variable to “true” or “false”.</p>
-</div>
-<div id="rstudio-integration" class="section level3">
-<h3 class="hasAnchor">
-<a href="#rstudio-integration" class="anchor"></a>RStudio integration</h3>
-<p>An addin to launch <code><a href="reference/manage_cases.html">manage_cases()</a></code> is provided with vdiffr. Use the addin menu to launch the Shiny app in an RStudio dialog.</p>
-<p><img src="https://raw.githubusercontent.com/r-lib/vdiffr/readme/rstudio-vdiffr.png" alt="RStudio addin"></p>
-</div>
-<div id="ess-integration" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ess-integration" class="anchor"></a>ESS integration</h3>
-<p>To use the Shiny app as part of ESS devtools integration with <code>C-c C-w C-v</code>, include something like this in your init file:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb4-1"><a href="#cb4-1"></a>(<span class="kw">defun</span><span class="fu"> ess-r-vdiffr-manage-cases </span>()</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  (interactive)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>  (ess-r-package-send-process <span class="st">"vdiffr::manage_cases(%s)</span><span class="sc">\n</span><span class="st">"</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>                              <span class="st">"Manage vdiffr cases for %s"</span>))</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>(define-key ess-r-package-dev-map <span class="st">"\C-v"</span> 'ess-r-vdiffr-manage-cases)</span></code></pre></div>
-</div>
-</div>
-<div id="debugging" class="section level2">
-<h2 class="hasAnchor">
-<a href="#debugging" class="anchor"></a>Debugging</h2>
-<p>It is sometimes difficult to understand the cause of a failure. This usually indicates that the plot is not created deterministically. Potential culprits are:</p>
+<a href="#debugging" class="anchor"></a>Debugging</h3>
+<p>It is sometimes difficult to understand the cause of a doppelganger failure. A frequent cause of failure is undeterministic generation of plots. Potential culprits are:</p>
 <ul>
 <li><p>Some of the plot components depend on random variation. Try setting a seed.</p></li>
 <li><p>The plot depends on some system library. For instance sf plots depend on libraries like GEOS and GDAL. It might not be possible to test these plots with vdiffr (which can still be used for manual inspection, add a [testthat::skip()] before the <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> call in that case).</p></li>
 </ul>
 <p>To help you understand the causes of a failure, vdiffr automatically logs the SVG diff of all failures when run under R CMD check. The log is located in <code>tests/vdiffr.Rout.fail</code> and should be displayed on Travis.</p>
 <p>You can also set the <code>VDIFFR_LOG_PATH</code> environment variable with <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv()</a></code> to unconditionally (also interactively) log failures in the file pointed by the variable.</p>
-</div>
-<div id="implementation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#implementation" class="anchor"></a>Implementation</h2>
-<div id="testthat-reporter" class="section level3">
-<h3 class="hasAnchor">
-<a href="#testthat-reporter" class="anchor"></a>testthat Reporter</h3>
-<p>vdiffr extends testthat through a custom <code>Reporter</code>. <a href="https://github.com/hadley/testthat/blob/master/R/reporter.R">Reporters</a> are classes (R6 classes in recent versions of testthat) whose instances collect cases and output a summary of the tests. While reporters are usually meant to provide output for the end user, you can also use them in functions to interact with testthat.</p>
-<p>vdiffr has a <a href="https://github.com/r-lib/vdiffr/blob/master/R/testthat-reporter.R">special reporter</a> that does nothing but activate a collecter for the visual test cases. <code><a href="reference/collect_cases.html">collect_cases()</a></code> calls <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test()</a></code> with this reporter. When <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> is called, it first checks whether the case is new or failed. If that’s the case, and if it finds that vdiffr’s collecter is active, it calls the collecter, which in turns records the current test case.</p>
-<p>This enables the user to run the tests with the usual development tools and get feedback in the form of skipped or failed cases. On the other hand, when vdiffr’s tools are called, we collect information about the tests of interest and wrap them in a data structure.</p>
-</div>
-<div id="svg-comparison" class="section level3">
-<h3 class="hasAnchor">
-<a href="#svg-comparison" class="anchor"></a>SVG comparison</h3>
-<p>Comparing SVG files is convenient and should work correctly in most situations. However, SVG is not suitable for tracking really subtle changes and regressions. See <a href="https://github.com/r-lib/vdiffr/issues/1">vdiffr’s issue #1</a> for a discussion on this. vdiffr may gain additional comparison backends in the future to make the tests more stringent.</p>
 </div>
 </div>
 </div>
@@ -229,10 +153,6 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 <ul class="list-unstyled">
 <li>Lionel Henry <br><small class="roles"> Maintainer, author </small>  </li>
 <li>Thomas Lin Pedersen <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Carl Sutherland <br><small class="roles"> Author </small>  <br><small>(jg-imagediff library)</small>
-</li>
-<li>David Hong <br><small class="roles"> Author </small>  <br><small>(TwoFace library)</small>
-</li>
 <li>T Jake Luciani <br><small class="roles"> Author </small>  <br><small>(svglite)</small>
 </li>
 <li>Matthieu Decorde <br><small class="roles"> Author </small>  <br><small>(svglite)</small>
@@ -256,7 +176,7 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Lionel Henry, Thomas Lin Pedersen, Carl Sutherland, David Hong, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
+  <p>Developed by Lionel Henry, Thomas Lin Pedersen, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
 </div>
 
 <div class="pkgdown">

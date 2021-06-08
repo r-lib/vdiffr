@@ -40,17 +40,10 @@
 
 
 <meta property="og:title" content="Does a figure look like its expected output? — expect_doppelganger" />
-<meta property="og:description" content="expect_doppelganger() takes a figure to check visually.
-If the figure has yet to be validated, the test is skipped. Call
-manage_cases() to validate the new figure, so vdiffr knows what
-to compare against.
-If the test has been validated, fig is compared to the
-validated figure. If the plot differs, a failure is issued
-(except on CRAN, see section on regression testing below).
-Either fix the problem, or call manage_cases() to validate the
-new figure appearance.
-
-" />
+<meta property="og:description" content="expect_doppelganger() is a testthat expectation for graphical
+plots. It generates SVG snapshots that you can review graphically
+with testthat::snapshot_review(). You will find more information
+about snapshotting in the testthat snapshots vignette." />
 
 
 
@@ -136,31 +129,24 @@ new figure appearance.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Does a figure look like its expected output?</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/vdiffr/blob/master/R/testthat-ui.R'><code>R/testthat-ui.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/vdiffr/blob/master/R/expect-doppelganger.R'><code>R/expect-doppelganger.R</code></a></small>
     <div class="hidden name"><code>expect_doppelganger.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>expect_doppelganger()</code> takes a figure to check visually.</p><ul>
-<li><p>If the figure has yet to be validated, the test is skipped. Call
-<code><a href='manage_cases.html'>manage_cases()</a></code> to validate the new figure, so vdiffr knows what
-to compare against.</p></li>
-<li><p>If the test has been validated, <code>fig</code> is compared to the
-validated figure. If the plot differs, a failure is issued
-(except on CRAN, see section on regression testing below).</p>
-<p>Either fix the problem, or call <code><a href='manage_cases.html'>manage_cases()</a></code> to validate the
-new figure appearance.</p></li>
-</ul>
-
+    <p><code>expect_doppelganger()</code> is a testthat expectation for graphical
+plots. It generates SVG snapshots that you can review graphically
+with <code><a href='https://testthat.r-lib.org/reference/snapshot_accept.html'>testthat::snapshot_review()</a></code>. You will find more information
+about snapshotting in the <a href='https://testthat.r-lib.org/articles/snapshotting.html'>testthat snapshots vignette</a>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>expect_doppelganger</span><span class='op'>(</span>
   <span class='va'>title</span>,
   <span class='va'>fig</span>,
-  path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
   <span class='va'>...</span>,
-  verbose <span class='op'>=</span> <span class='cn'>NULL</span>,
-  writer <span class='op'>=</span> <span class='va'>write_svg</span>
+  writer <span class='op'>=</span> <span class='va'>write_svg</span>,
+  cran <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -179,26 +165,13 @@ sanitzed form, with special characters converted to <code>"-"</code>).</p></td>
       <th>fig</th>
       <td><p>A figure to test. This can be a ggplot object, a
 recordedplot, or more generally any object with a <code>print</code> method.</p>
-<p>For plots that can't be represented as printable objects, you can
-pass a function. This function must construct the plot and print
-it.</p></td>
+<p>If you need to test a plot with non-printable objects (e.g. base
+plots), <code>fig</code> can be a function that generates and prints the
+plot, e.g. <code>fig = function() plot(1:3)</code>.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>The path where the test case should be stored, relative
-to the <code>tests/figs/</code> folder. If <code>NULL</code> (the default), the current
-testthat context is used to create a subfolder. Supply an empty
-string <code>""</code> if you want the figures to be stored in the root
-folder.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='https://testthat.r-lib.org/reference/compare.html'>testthat::compare()</a></code> to
-control specifics of comparison.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>Soft-deprecated. See the debugging section.</p></td>
+      <th>path, ...</th>
+      <td><p><a href='https://lifecycle.r-lib.org/articles/stages.html#deprecated'><img src='figures/lifecycle-deprecated.svg' alt='[Deprecated]' /></a>.</p></td>
     </tr>
     <tr>
       <th>writer</th>
@@ -207,41 +180,33 @@ and an optional plot title. It should transform the plot to SVG
 in a deterministic way and write it to the target file. See
 <code><a href='write_svg.html'>write_svg()</a></code> (the default) for an example.</p></td>
     </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="regression-testing-versus-unit-testing"><a class="anchor" href="#regression-testing-versus-unit-testing"></a>Regression testing versus Unit testing</h2>
-
-    
-
-
-<p>Failures to match a validated appearance are only reported when the
-tests are run locally, on Travis, Appveyor, or any environment
-where the <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("CI")</a></code> or <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("NOT_CRAN")</a></code> variables
-are set. Because vdiffr is more of a monitoring than a unit testing
-tool, it shouldn't cause R CMD check failures on the CRAN machines.</p>
-<p>Checking the appearance of a figure is inherently fragile. It is
-similar to testing for errors by matching exact error messages:
-these messages are susceptible to change at any time. Similarly,
-the appearance of plots depends on a lot of upstream code, such as
-the way margins and spacing are computed. vdiffr uses a special
-ggplot2 theme that should change very rarely, but there are just
-too many upstream factors that could cause breakages. For this
-reason, figure mismatches are not necessarily representative of
-actual failures.</p>
-<p>Visual testing is not an alternative to writing unit tests for the
-internal data transformations performed during the creation of your
-figure. It is more of a monitoring tool that allows you to quickly
-check how the appearance of your figures changes over time, and to
+    <tr>
+      <th>cran</th>
+      <td><p>If <code>FALSE</code> (the default), mismatched snapshots only
+cause a failure when you run tests locally or in your CI (Github
+Actions or any platform that sets the <code>CI</code> environment variable).
+If <code>TRUE</code>, failures may also occur on CRAN machines.</p>
+<p>Failures are disabled on CRAN by default because testing the
+appearance of a figure is inherently fragile. Changes in the R
+graphics engine or in ggplot2 may cause subtle differences in the
+aspect of a plot, such as a slightly smaller or larger margin.
+These changes will cause spurious failures because you need to
+update your snapshots to reflect the upstream changes.</p>
+<p>It would be distracting for both you and the CRAN maintainers if
+such changes systematically caused failures on CRAN. This is why
+snapshot expectations do not fail on CRAN by default and should
+be treated as a monitoring tool that allows you to quickly check
+how the appearance of your figures changes over time, and to
 manually assess whether changes reflect actual problems in your
 package.</p>
-<p>If you need to override the default vdiffr behaviour on CRAN (not
-recommended) or Travis (for example to run the tests in a
-particular builds but not others), set the <code>VDIFFR_RUN_TESTS</code>
-environment variable to "true" or "false".</p>
+<p>Internally, this argument is passed to
+<code><a href='https://testthat.r-lib.org/reference/expect_snapshot_file.html'>testthat::expect_snapshot_file()</a></code>.</p></td>
+    </tr>
+    </table>
+
     <h2 class="hasAnchor" id="debugging"><a class="anchor" href="#debugging"></a>Debugging</h2>
 
     
-
 
 <p>It is sometimes difficult to understand the cause of a failure.
 This usually indicates that the plot is not created
@@ -250,9 +215,7 @@ deterministically. Potential culprits are:</p><ul>
 setting a seed.</p></li>
 <li><p>The plot depends on some system library. For instance sf plots
 depend on libraries like GEOS and GDAL. It might not be possible
-to test these plots with vdiffr (which can still be used for
-manual inspection, add a <code><a href='https://testthat.r-lib.org/reference/skip.html'>testthat::skip()</a></code> before the
-<code>expect_doppelganger()</code> call in that case).</p></li>
+to test these plots with vdiffr.</p></li>
 </ul>
 
 <p>To help you understand the causes of a failure, vdiffr
@@ -289,7 +252,7 @@ in the file pointed by the variable.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Lionel Henry, Thomas Lin Pedersen, Carl Sutherland, David Hong, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
+  <p>Developed by Lionel Henry, Thomas Lin Pedersen, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
 </div>
 
 <div class="pkgdown">

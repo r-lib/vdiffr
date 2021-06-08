@@ -132,12 +132,26 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#vdiffr-development-version" class="anchor"></a>vdiffr (development version)<small> Unreleased </small>
 </h1>
+<p>This release includes two major changes:</p>
+<ol>
+<li><p>The internal SVG engine has been updated. This means you will have to regenerate all existing snapshots.</p></li>
+<li><p>The snapshot management system now uses testthat (see <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="uri">https://testthat.r-lib.org/articles/snapshotting.html</a>). Most of the R and javascript code has been removed from vdiffr as a consequence. vdiffr now serves as a reproducible SVG generation engine for testthat snapshots.</p></li>
+</ol>
+<div id="migration-of-existing-snapshots" class="section level2">
+<h2 class="hasAnchor">
+<a href="#migration-of-existing-snapshots" class="anchor"></a>Migration of existing snapshots</h2>
+<p>There are two steps to update your snapshots to vdiffr 1.0.</p>
+<ol>
+<li><p>This step is optional. Install the github-only 0.4.0 version of vdiffr with <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("r-lib/vdiffr@v0.4.0")</a></code>. This release only contains the new SVG engine. Review the snapshot changes as usual with <code>vdiffr::manage_cases()</code>.</p></li>
+<li><p>Install vdiffr 1.0.0 from CRAN, delete the <code>tests/figs</code> directory, run <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test()</a></code>, and then <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html">testthat::snapshot_review()</a></code>.</p></li>
+</ol>
+</div>
 </div>
     <div id="vdiffr-040" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.0">
 <a href="#vdiffr-040" class="anchor"></a>vdiffr 0.4.0<small> Unreleased </small>
 </h1>
-<p>This is a github-only release that is meant to help you migrate from vdiffr 0.3.x to vdiffr 1.0.0. The 1.0 release of vdiffr includes two major changes. It switches to testthat 3e for snapshot management and it uses an updated SVG engine for the generation of snapshots. The github-only 0.4.0 release only includes the new SVG engine to make it easy to compare cases with <code><a href="../reference/manage_cases.html">manage_cases()</a></code>.</p>
+<p>This is a github-only release that is meant to help you migrate from vdiffr 0.3.x to vdiffr 1.0.0. The 1.0 release of vdiffr includes two major changes. It switches to testthat 3e for snapshot management and it uses an updated SVG engine for the generation of snapshots. The github-only 0.4.0 release only includes the new SVG engine to make it easy to compare cases with <code>manage_cases()</code>.</p>
 <p>This intermediate step in the migration of snapshots is optional. You can also choose to update directly with the 1.0.0 release but you won’t be able to compare the new snapshots to your old ones.</p>
 <p>Note that smaller points are expected in the new snapshots because of a bugfix.</p>
 <ul>
@@ -207,14 +221,14 @@
 <h2 class="hasAnchor">
 <a href="#features" class="anchor"></a>Features</h2>
 <ul>
-<li><p>vdiffr now advises user to run <code><a href="../reference/manage_cases.html">manage_cases()</a></code> when a figure was not validated yet (<a href='https://github.com/r-lib/vdiffr/issues/25'>#25</a>).</p></li>
+<li><p>vdiffr now advises user to run <code>manage_cases()</code> when a figure was not validated yet (<a href='https://github.com/r-lib/vdiffr/issues/25'>#25</a>).</p></li>
 <li><p>Fixed a bug in the Shiny app that prevented SVGs from being displayed in Firefox (<a href='https://github.com/KZARCA'>@KZARCA</a>, <a href='https://github.com/r-lib/vdiffr/issues/29'>#29</a>).</p></li>
-<li><p><code><a href="../reference/manage_cases.html">manage_cases()</a></code> gains an <code>options</code> argument that is passed to <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyApp()</a></code> (<a href='https://github.com/KZARCA'>@KZARCA</a>).</p></li>
+<li><p><code>manage_cases()</code> gains an <code>options</code> argument that is passed to <code><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shiny::shinyApp()</a></code> (<a href='https://github.com/KZARCA'>@KZARCA</a>).</p></li>
 <li><p>The Shiny app now has a quit button (<a href='https://github.com/ilarischeinin'>@ilarischeinin</a>).</p></li>
 <li><p>New <code>VDIFFR_LOG_PATH</code> environment variable. When set, vdiffr pushes diffs of failed SVG comparisons to that file.</p></li>
 <li><p><code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> now takes a <code>writer</code> argument. This makes it easy to use vdiffr with a different SVG engine. See <code><a href="../reference/write_svg.html">?write_svg</a></code> for an example function. Packages implementing a different SVG engine should wrap around <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> to pass their custom writer.</p></li>
 <li><p><code><a href="../reference/write_svg.html">write_svg()</a></code> is now an exported function. It provides a template (function arguments and return value) for SVG writer functions.</p></li>
-<li><p><code><a href="../reference/manage_cases.html">manage_cases()</a></code> no longer checks for orphaned cases when a filter is supplied. (Orphaned cases are figures dangling in the <code>figs</code> folder even though their original <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> has been removed from the tests.)</p></li>
+<li><p><code>manage_cases()</code> no longer checks for orphaned cases when a filter is supplied. (Orphaned cases are figures dangling in the <code>figs</code> folder even though their original <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> has been removed from the tests.)</p></li>
 </ul>
 </div>
 <div id="life-cycle" class="section level2">
@@ -225,7 +239,7 @@
 <p>The <code>verbose</code> argument of <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> is soft-deprecated. Please use the vdiffr failure log instead. It is created automatically when run under R CMD check in <code>tests/vdiffr.Rout.fail</code>, and should be displayed on Travis.</p>
 <p>You can also set the <code>VDIFFR_LOG_PATH</code> environment variable with <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv()</a></code> to unconditionally (also interactively) log failures in the file pointed by the variable.</p>
 </li>
-<li><p><code><a href="../reference/add_dependency.html">add_dependency()</a></code> is soft-deprecated without replacement.</p></li>
+<li><p><code>add_dependency()</code> is soft-deprecated without replacement.</p></li>
 <li><p>The <code>user_fonts</code> argument of <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> is defunct because it complicated the UI for no clear benefit. The fonts used to generate the SVGs are now hardcoded to Liberation and Symbola.</p></li>
 </ul>
 </div>
@@ -240,7 +254,7 @@
 <p>(<a href='https://github.com/gwarnes-mdsol'>@gwarnes-mdsol</a>) and Hiroaki Yutani (<a href='https://github.com/yutannihilation'>@yutannihilation</a>) for helping out with this!</p>
 <p>I’m working on embedding svglite in vdiffr and compiling statically to FreeType and Harfbuzz to make SVG generation deterministic across platforms. Until then vdiffr will remain a bit unstable (but should silently fail if dependencies have diverged).</p>
 </li>
-<li><p>Use <code><a href="../reference/last_collection_error.html">last_collection_error()</a></code> to print a testthat error that occurred while collecting the test cases.</p></li>
+<li><p>Use <code>last_collection_error()</code> to print a testthat error that occurred while collecting the test cases.</p></li>
 </ul>
 </div>
     <div id="vdiffr-022" class="section level1">
@@ -281,7 +295,7 @@
 <h2 class="hasAnchor">
 <a href="#handling-of-incompatible-systems" class="anchor"></a>Handling of incompatible systems</h2>
 <p>The tests are now skipped if the FreeType version used to build the comparison SVGs does not match the version installed on the system where the tests are run. This is necessary because changes in new version of FreeType might affect the computation of text extents, which then causes svglite to produce slightly different SVGs. The minor version is not taken into account so FreeType 2.7.1 is deemed compatible with 2.7.2 but not with 2.8.0.</p>
-<p>In practice, this means that package contributors should only validate visual cases if their FreeType version matches the one of the package maintainer. Also, the maintainer must update the version recorded in the package repository (in the file <code>./tests/figs/deps.txt</code>) when FreeType has been updated on their system. Running <code><a href="../reference/validate_cases.html">vdiffr::validate_cases()</a></code> updates the dependency file even if there are no visual case to update.</p>
+<p>In practice, this means that package contributors should only validate visual cases if their FreeType version matches the one of the package maintainer. Also, the maintainer must update the version recorded in the package repository (in the file <code>./tests/figs/deps.txt</code>) when FreeType has been updated on their system. Running <code>vdiffr::validate_cases()</code> updates the dependency file even if there are no visual case to update.</p>
 <p>In the future, we may provide a version of vdiffr statically compiled with a specific version of FreeType to prevent these issues.</p>
 </div>
 <div id="other-changes" class="section level2">
@@ -299,7 +313,7 @@
 <ul>
 <li><p><code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> no longer throws an error when FreeType is too old. Instead, the test is skipped. This ensures that R CMD check passes on those platforms (e.g., CRAN’s Solaris test server).</p></li>
 <li><p>Depends on gdtools 0.1.2 or later as this version fixes a crash on Linux platforms.</p></li>
-<li><p><code><a href="../reference/htmlwidgets.html">widget_toggle()</a></code>, <code><a href="../reference/htmlwidgets.html">widget_slide()</a></code> and <code><a href="../reference/htmlwidgets.html">widget_diff()</a></code> now take plots as arguments. This makes it easy to embed a vdiffr widget in R Markdown documents. The underscored versions take HTML sources as argument (paths to SVG files or inline SVGs).</p></li>
+<li><p><code>widget_toggle()</code>, <code>widget_slide()</code> and <code>widget_diff()</code> now take plots as arguments. This makes it easy to embed a vdiffr widget in R Markdown documents. The underscored versions take HTML sources as argument (paths to SVG files or inline SVGs).</p></li>
 </ul>
 </div>
     <div id="vdiffr-010" class="section level1">
@@ -311,8 +325,8 @@
 <li><p>The figures folder is hardcoded to <code>tests/figs/</code>.</p></li>
 <li><p>The figures are now stored in subfolders according to the current testthat context. <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> accepts the <code>path</code> argument to bypass this behaviour (set it to <code>""</code> to store the figures in <code>tests/figs/</code>).</p></li>
 <li><p>The <code>title</code> argument of <code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> now serves as <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle()</a></code> in ggplot2 figures (unless a title is already set). It is also standardised and used as filename to store the figure (spaces and non-alphanumeric characters are converted to dashes).</p></li>
-<li><p>Add support for handling orphaned cases: you can now remove figures left over from deleted tests with <code><a href="../reference/validate_cases.html">delete_orphaned_cases()</a></code> or from the Shiny app.</p></li>
-<li><p>New <code>filter</code> argument to <code><a href="../reference/collect_cases.html">collect_cases()</a></code> and <code><a href="../reference/manage_cases.html">manage_cases()</a></code>. This lets you filter the test files from which to collect the cases, which is useful to speed up the collection for large codebases with a lot of unit tests.</p></li>
+<li><p>Add support for handling orphaned cases: you can now remove figures left over from deleted tests with <code>delete_orphaned_cases()</code> or from the Shiny app.</p></li>
+<li><p>New <code>filter</code> argument to <code>collect_cases()</code> and <code>manage_cases()</code>. This lets you filter the test files from which to collect the cases, which is useful to speed up the collection for large codebases with a lot of unit tests.</p></li>
 <li><p>Fix invalid generation of SVG files (<a href='https://github.com/r-lib/vdiffr/issues/3'>#3</a>)</p></li>
 <li><p>Give a warning when multiple doppelgangers have the same name (<a href='https://github.com/r-lib/vdiffr/issues/4'>#4</a>).</p></li>
 <li><p>Remove CR line endings before comparing svg files for compatibility with Windows</p></li>
@@ -337,7 +351,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Lionel Henry, Thomas Lin Pedersen, Carl Sutherland, David Hong, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
+  <p>Developed by Lionel Henry, Thomas Lin Pedersen, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
 </div>
 
 <div class="pkgdown">

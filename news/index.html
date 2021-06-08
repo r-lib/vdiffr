@@ -146,6 +146,14 @@
 <li><p>Install vdiffr 1.0.0 from CRAN, delete the <code>tests/figs</code> directory, run <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test()</a></code>, and then <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html">testthat::snapshot_review()</a></code>.</p></li>
 </ol>
 </div>
+<div id="other-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<ul>
+<li>
+<code><a href="../reference/expect_doppelganger.html">expect_doppelganger()</a></code> now supports grid objects such as <code>gtable</code> and <code>grob</code> (<a href='https://github.com/r-lib/vdiffr/issues/36'>#36</a>).</li>
+</ul>
+</div>
 </div>
     <div id="vdiffr-040" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.0">
@@ -298,9 +306,9 @@
 <p>In practice, this means that package contributors should only validate visual cases if their FreeType version matches the one of the package maintainer. Also, the maintainer must update the version recorded in the package repository (in the file <code>./tests/figs/deps.txt</code>) when FreeType has been updated on their system. Running <code>vdiffr::validate_cases()</code> updates the dependency file even if there are no visual case to update.</p>
 <p>In the future, we may provide a version of vdiffr statically compiled with a specific version of FreeType to prevent these issues.</p>
 </div>
-<div id="other-changes" class="section level2">
+<div id="other-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<a href="#other-changes-1" class="anchor"></a>Other changes</h2>
 <ul>
 <li>The minimal R version required by vdiffr is now R 3.1.0.</li>
 </ul>

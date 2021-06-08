@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vdiffr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -128,13 +128,13 @@
       <small>Source: <a href='https://github.com/r-lib/vdiffr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="vdiffr-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#vdiffr-development-version" class="anchor"></a>vdiffr (development version)<small> Unreleased </small>
+    <div id="vdiffr-100" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.0">
+<a href="#vdiffr-100" class="anchor"></a>vdiffr 1.0.0<small> Unreleased </small>
 </h1>
 <p>This release includes two major changes:</p>
 <ol>
-<li><p>The internal SVG engine has been updated. This means you will have to regenerate all existing snapshots.</p></li>
+<li><p>The internal SVG engine has been updated. It is now lighter, more robust, with fewer dependencies. It also generates more correct SVG. The main user visible change is that points look smaller than with older snapshots. Because of this update you will have to regenerate all existing snapshots with the new engine.</p></li>
 <li><p>The snapshot management system now uses testthat (see <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="uri">https://testthat.r-lib.org/articles/snapshotting.html</a>). Most of the R and javascript code has been removed from vdiffr as a consequence. vdiffr now serves as a reproducible SVG generation engine for testthat snapshots.</p></li>
 </ol>
 <div id="migration-of-existing-snapshots" class="section level2">

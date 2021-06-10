@@ -41,6 +41,6 @@ LinkingTo:
     cpp11
 RoxygenNote: 7.1.1.9001
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/r-lib/vdiffr
+URL: https://vdiffr.r-lib.org/, https://github.com/r-lib/vdiffr
 BugReports: https://github.com/r-lib/vdiffr/issues
 SystemRequirements: C++11

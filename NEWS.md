@@ -1,5 +1,10 @@
 # vdiffr (development version)
 
+* testthat no longer auto-deletes snapshot files that were not
+  generated because of an unexpected error or a `skip()`
+  (r-lib/testthat#1393).
+
+
 # vdiffr 1.0.0
 
 This release includes two major changes:

@@ -91,7 +91,16 @@ expect_doppelganger <- function(title,
                                 ...,
                                 writer = write_svg,
                                 cran = FALSE) {
+  testthat::local_edition(3)
+
   fig_name <- str_standardise(title)
+  file <- paste0(fig_name, ".svg")
+
+  # Announce snapshot file before touching `fig` in case evaluation
+  # causes an error. This allows testthat to restore the files
+  # (see r-lib/testthat#1393).
+  testthat::announce_snapshot_file(name = file)
+
   testcase <- make_testcase_file(fig_name)
   writer(fig, testcase, title)
 
@@ -115,10 +124,6 @@ expect_doppelganger <- function(title,
     ))
   }
 
-  testthat::local_edition(3)
-
-  file <- paste0(fig_name, ".svg")
-
   withCallingHandlers(
     testthat::expect_snapshot_file(
       testcase,
@@ -134,7 +139,7 @@ expect_doppelganger <- function(title,
         ))
       }
 
-      if (!is.null(snapshotter <- get_snapshotter())) {
+      if (!is_null(snapshotter <- get_snapshotter())) {
         path_old <- snapshot_path(snapshotter, file)
         path_new <- snapshot_path(snapshotter, paste0(fig_name, ".new.svg"))
 

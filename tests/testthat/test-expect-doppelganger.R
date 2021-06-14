@@ -89,3 +89,21 @@ test_that("supports `grob` objects (#36)", {
   )
   expect_doppelganger("grob", circle)
 })
+
+test_that("skips and unexpected errors reset snapshots (r-lib/testthat#1393)", {
+  regenerate <- FALSE
+
+  if (regenerate) {
+    withr::local_envvar(c(VDIFFR_REGENERATE_SNAPS = "true"))
+  }
+
+  suppressMessages(
+    test_file(
+      test_path("test-snapshot", "test-snapshot.R"),
+      reporter = NULL
+    )
+  )
+
+  expect_true(file.exists("test-snapshot/_snaps/snapshot/error-resets-snapshots.svg"))
+  expect_true(file.exists("test-snapshot/_snaps/snapshot/skip-resets-snapshots.svg"))
+})

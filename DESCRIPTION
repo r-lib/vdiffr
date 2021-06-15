@@ -40,7 +40,7 @@ Suggests:
 LinkingTo:
     cpp11
 Remotes:
-    r-lib/testthat@announce-snapshot-file
+    r-lib/testthat
 RoxygenNote: 7.1.1.9001
 Roxygen: list(markdown = TRUE)
 URL: https://vdiffr.r-lib.org/, https://github.com/r-lib/vdiffr

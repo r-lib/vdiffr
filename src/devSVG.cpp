@@ -232,7 +232,7 @@ inline void write_attr_str(SvgStreamPtr stream, const char* attr, const char* va
 
 // Writing clip path attribute
 inline void write_attr_clip(SvgStreamPtr stream, std::string clipid) {
-  if (!clipid.size())
+  if (clipid.empty())
     return;
 
   (*stream) << " clip-path='url(#cp" << clipid << ")'";

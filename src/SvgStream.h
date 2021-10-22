@@ -65,7 +65,7 @@ SvgStream& operator<<(SvgStream& object, const T& data) {
   return object;
 }
 template <>
-SvgStream& operator<<(SvgStream& object, const double& data) {
+inline SvgStream& operator<<(SvgStream& object, const double& data) {
   // Make sure negative zeros are converted to positive zero for
   // reproducibility of SVGs
   object.write(dbl_format(data));

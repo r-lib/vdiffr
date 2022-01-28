@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">vdiffr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -57,13 +53,14 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Release notes</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2021/06/vdiffr-1-0-0/">Version 1.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2021/06/vdiffr-1-0-0/" class="external-link">Version 1.0.0</a>
     </li>
     <li>
-      <a href="https://www.tidyverse.org/articles/2019/01/vdiffr-0-3-0/">Version 0.3.0</a>
+      <a href="https://www.tidyverse.org/articles/2019/01/vdiffr-0-3-0/" class="external-link">Version 0.3.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="news/index.html">Change log</a>
     </li>
   </ul>
@@ -71,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/vdiffr/">
+  <a href="https://github.com/r-lib/vdiffr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -88,45 +85,47 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="vdiffr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#vdiffr" class="anchor"></a>vdiffr</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="vdiffr">vdiffr<a class="anchor" aria-label="anchor" href="#vdiffr"></a>
+</h1></div>
 <!-- badges: start -->
 
-<p>vdiffr is a testthat extension for monitoring the appearance of R plots. It generates reproducible SVG files and registers them as the <a href="https://testthat.r-lib.org/articles/snapshotting.html">testthat snapshots</a>.</p>
-<div id="how-to-use-vdiffr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-use-vdiffr" class="anchor"></a>How to use vdiffr</h2>
-<p>1) Add graphical expectations by including <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> in your test files.</p>
-<p>1) Run <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test()</a></code>.</p>
-<p>1) If <code>test()</code> detected new snapshots or changes to existing snapshots, run <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html">testthat::snapshot_review()</a></code> to review them.</p>
+<p>vdiffr is a testthat extension for monitoring the appearance of R plots. It generates reproducible SVG files and registers them as the <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">testthat snapshots</a>.</p>
+<div class="section level2">
+<h2 id="how-to-use-vdiffr">How to use vdiffr<a class="anchor" aria-label="anchor" href="#how-to-use-vdiffr"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li><p>Add graphical expectations by including <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> in your test files.</p></li>
+<li><p>Run <code>devtools::test()</code>.</p></li>
+<li><p>If <code>test()</code> detected new snapshots or changes to existing snapshots, run <code><a href="https://testthat.r-lib.org/reference/snapshot_accept.html" class="external-link">testthat::snapshot_review()</a></code> to review them.</p></li>
+</ol>
 <p>There may be many reasons for a snapshot to fail. Upstream changes (e.g. to the R graphics engine or to ggplot2) may cause subtle differences in your plots that are not actual failures. For this reason, snapshots do not cause failures on CRAN by default. You will only see failures locally or on CI platforms such as Github Actions.</p>
-<div id="adding-expectations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#adding-expectations" class="anchor"></a>Adding expectations</h3>
+<div class="section level3">
+<h3 id="adding-expectations">Adding expectations<a class="anchor" aria-label="anchor" href="#adding-expectations"></a>
+</h3>
 <p>vdiffr integrates with testthat through the <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> expectation. It takes as arguments:</p>
 <ul>
 <li><p>A title. This title is used in two ways. First, the title is standardised (it is converted to lowercase and any character that is not alphanumeric or a space is turned into a dash) and used as filename for storing the figure. Secondly, with ggplot2 figures the title is automatically added to the plot with <code>ggtitle()</code> (only if no ggtitle has been set).</p></li>
 <li><p>A figure. This can be a ggplot object, a recordedplot, a function to be called, or more generally any object with a <code>print</code> method.</p></li>
 </ul>
 <p>The snapshots are recorded in subfolders of the <code>_snaps/</code> directory.</p>
-<pre class="{r}"><code>disp_hist_base &lt;- function() hist(mtcars$disp)
-disp_hist_ggplot &lt;- ggplot(mtcars, aes(disp)) + geom_histogram()
+<pre class="{r}"><code><span class="va">disp_hist_base</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span><span class="op">)</span>
+<span class="va">disp_hist_ggplot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">disp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span>
 
-vdiffr::expect_doppelganger("Base graphics histogram", disp_hist_base)
-vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
+<span class="fu">vdiffr</span><span class="fu">::</span><span class="fu"><a href="reference/expect_doppelganger.html">expect_doppelganger</a></span><span class="op">(</span><span class="st">"Base graphics histogram"</span>, <span class="va">disp_hist_base</span><span class="op">)</span>
+<span class="fu">vdiffr</span><span class="fu">::</span><span class="fu"><a href="reference/expect_doppelganger.html">expect_doppelganger</a></span><span class="op">(</span><span class="st">"ggplot2 histogram"</span>, <span class="va">disp_hist_ggplot</span><span class="op">)</span></code></pre>
 <p>Note that in addition to automatic ggtitles, ggplot2 figures are assigned the minimalistic theme <code>theme_test()</code> (unless they already have been assigned a theme).</p>
 </div>
-<div id="debugging" class="section level3">
-<h3 class="hasAnchor">
-<a href="#debugging" class="anchor"></a>Debugging</h3>
+<div class="section level3">
+<h3 id="debugging">Debugging<a class="anchor" aria-label="anchor" href="#debugging"></a>
+</h3>
 <p>It is sometimes difficult to understand the cause of a doppelganger failure. A frequent cause of failure is undeterministic generation of plots. Potential culprits are:</p>
 <ul>
 <li><p>Some of the plot components depend on random variation. Try setting a seed.</p></li>
 <li><p>The plot depends on some system library. For instance sf plots depend on libraries like GEOS and GDAL. It might not be possible to test these plots with vdiffr (which can still be used for manual inspection, add a [testthat::skip()] before the <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> call in that case).</p></li>
 </ul>
 <p>To help you understand the causes of a failure, vdiffr automatically logs the SVG diff of all failures when run under R CMD check. The log is located in <code>tests/vdiffr.Rout.fail</code> and should be displayed on Travis.</p>
-<p>You can also set the <code>VDIFFR_LOG_PATH</code> environment variable with <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv()</a></code> to unconditionally (also interactively) log failures in the file pointed by the variable.</p>
+<p>You can also set the <code>VDIFFR_LOG_PATH</code> environment variable with <code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv()</a></code> to unconditionally (also interactively) log failures in the file pointed by the variable.</p>
 </div>
 </div>
 </div>
@@ -134,56 +133,63 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=vdiffr">https://​cloud.r-project.org/​package=vdiffr</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/r-lib/vdiffr/">https://​github.com/​r-lib/​vdiffr/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/r-lib/vdiffr/issues">https://​github.com/​r-lib/​vdiffr/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Lionel Henry <br><small class="roles"> Maintainer, author </small>  </li>
-<li>Thomas Lin Pedersen <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>T Jake Luciani <br><small class="roles"> Author </small>  <br><small>(svglite)</small>
-</li>
-<li>Matthieu Decorde <br><small class="roles"> Author </small>  <br><small>(svglite)</small>
-</li>
-<li>Vaudor Lise <br><small class="roles"> Author </small>  <br><small>(svglite)</small>
-</li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://cloud.r-project.org/package=vdiffr" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/r-lib/vdiffr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/r-lib/vdiffr/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/r-lib/vdiffr/actions"><img src="https://github.com/r-lib/vdiffr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/r-lib/vdiffr?branch=master"><img src="https://codecov.io/gh/r-lib/vdiffr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://cran.r-project.org/package=vdiffr"><img src="https://www.r-pkg.org/badges/version/vdiffr" alt="CRAN status"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing vdiffr</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Lionel Henry <br><small class="roles"> Maintainer, author </small>  </li>
+<li>Thomas Lin Pedersen <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>T Jake Luciani <br><small class="roles"> Author </small>  </li>
+<li>Matthieu Decorde <br><small class="roles"> Author </small>  </li>
+<li>Vaudor Lise <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/r-lib/vdiffr/actions" class="external-link"><img src="https://github.com/r-lib/vdiffr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/r-lib/vdiffr?branch=master" class="external-link"><img src="https://codecov.io/gh/r-lib/vdiffr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://cran.r-project.org/package=vdiffr" class="external-link"><img src="https://www.r-pkg.org/badges/version/vdiffr" alt="CRAN status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Lionel Henry, Thomas Lin Pedersen, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
+  <p></p>
+<p>Developed by Lionel Henry, Thomas Lin Pedersen, T Jake Luciani, Matthieu Decorde, Vaudor Lise.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -191,6 +197,8 @@ vdiffr::expect_doppelganger("ggplot2 histogram", disp_hist_ggplot)</code></pre>
 
   
 
+
+  
 
   </body>
 </html>

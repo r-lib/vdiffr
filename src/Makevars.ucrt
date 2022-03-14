@@ -1,2 +1,8 @@
-CRT=-ucrt
-include Makevars.win
+CXX_STD = CXX11
+
+PKG_LIBS = -lpng -lz
+
+all: clean
+
+clean:
+	rm -f $(OBJECTS)

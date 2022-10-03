@@ -1,7 +1,9 @@
+# vdiffr (development version)
+
+* Re-enable unit tests
 # vdiffr 1.0.4
 
 * Compatibility with UCRT build of Windows using Rtools42.
-* Enable unit tests (@maksymiuks fork)
 
 
 # vdiffr 1.0.3

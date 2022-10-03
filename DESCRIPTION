@@ -40,6 +40,7 @@ Imports:
     xml2 (>= 1.0.0)
 Suggests:
     covr,
+    decor,
     ggplot2 (>= 3.2.0),
     roxygen2,
     withr

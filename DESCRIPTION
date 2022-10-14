@@ -1,6 +1,6 @@
 Package: vdiffr
 Title: Visual Regression Testing and Graphical Diffing
-Version: 1.0.4.9000
+Version: 1.0.4.9001
 Authors@R: c(
     person("Lionel", "Henry", , "lionel@rstudio.com", c("cre", "aut")),
     person("Thomas Lin", "Pedersen", , "thomas.pedersen@rstudio.com", 
@@ -34,6 +34,7 @@ Imports:
     xml2 (>= 1.0.0)
 Suggests:
     covr,
+    decor,
     ggplot2 (>= 3.2.0),
     roxygen2,
     withr

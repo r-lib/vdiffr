@@ -904,7 +904,7 @@ void makeDevice(SvgStreamPtr stream, std::string bg_, double width, double heigh
       cpp11::stop("Failed to start SVG device");
 
     pGEDevDesc dd = GEcreateDevDesc(dev);
-    GEaddDevice2(dd, "devSVG");
+    GEaddDevice2(dd, "devSVG_vdiffr");
     GEinitDisplayList(dd);
 
   } END_SUSPEND_INTERRUPTS;

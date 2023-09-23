@@ -25,6 +25,7 @@ jobs:
           - {os: macos-latest,   r: 'release'}
 
           - {os: windows-latest, r: 'release'}
+          - {os: windows-latest, r: 'devel', rtools-version: '42'}
           # Use 3.6 to trigger usage of RTools35
           - {os: windows-latest, r: '3.6'}
           # use 4.1 to check with rtools40's older compiler
@@ -51,6 +52,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+          rtools-version: ${{ matrix.config.rtools-version }}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

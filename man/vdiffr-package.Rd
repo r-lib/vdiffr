@@ -18,11 +18,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Lionel Henry \email{lionel@rstudio.com}
+\strong{Maintainer}: Lionel Henry \email{lionel@posit.co}
 
 Authors:
 \itemize{
-  \item Thomas Lin Pedersen \email{thomas.pedersen@rstudio.com} (\href{https://orcid.org/0000-0002-5147-4711}{ORCID})
+  \item Thomas Lin Pedersen \email{thomas.pedersen@posit.co} (\href{https://orcid.org/0000-0002-5147-4711}{ORCID})
   \item T Jake Luciani \email{jake@apache.org} (svglite)
   \item Matthieu Decorde \email{matthieu.decorde@ens-lyon.fr} (svglite)
   \item Vaudor Lise \email{lise.vaudor@ens-lyon.fr} (svglite)
@@ -30,7 +30,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder, funder]
+  \item Posit Software, PBC [copyright holder, funder]
   \item Tony Plate (svglite: Early line dashing code) [contributor]
   \item David Gohel (svglite: Line dashing code and raster code) [contributor]
   \item Yixuan Qiu (svglite: Improved styles; polypath implementation) [contributor]

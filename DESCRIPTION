@@ -22,7 +22,7 @@ License: MIT + file LICENSE
 LazyData: true
 ByteCompile: true
 Depends:
-    R (>= 3.2.0)
+    R (>= 4.0)
 Imports:
     diffobj,
     glue,

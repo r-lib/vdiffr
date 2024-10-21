@@ -1,9 +1,8 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-10-06T10:31Z
+last_built: 2024-10-21T14:07Z
 urls:
   reference: https://vdiffr.r-lib.org/reference
   article: https://vdiffr.r-lib.org/articles
-

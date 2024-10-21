@@ -1,4 +1,1 @@
-CXX_STD = CXX11
-
-CRT = -ucrt
-include Makevars.win
+PKG_LIBS = -lpng -lz

@@ -1,10 +1,16 @@
 #' Does a figure look like its expected output?
 #'
+#' @description
+#'
 #' `expect_doppelganger()` is a testthat expectation for graphical
 #' plots. It generates SVG snapshots that you can review graphically
 #' with [testthat::snapshot_review()]. You will find more information
 #' about snapshotting in the [testthat snapshots
 #' vignette](https://testthat.r-lib.org/articles/snapshotting.html).
+#'
+#' Note that `expect_doppelgagner()` requires R version 4.1.0. If run
+#' on an earlier version of R, it emits a `testthat::skip()` so that you
+#' can still run other checks on old versions of R.
 #'
 #' @param title A brief description of what is being tested in the
 #'   figure. For instance: "Points and lines overlap".

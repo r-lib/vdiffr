@@ -133,7 +133,7 @@ expect_doppelganger <- function(title,
     ),
     expectation_failure = function(cnd) {
       if (is_snapshot_stale(title, testcase)) {
-        testthat::skip(paste_line(
+        warn(paste_line(
           "SVG snapshot generated under a different vdiffr version.",
           "i" = "Please update your snapshots."
         ))
@@ -187,7 +187,7 @@ is_snapshot_stale <- function(title, testcase) {
 
   file <- paste0(str_standardise(title), ".svg")
   path <- snapshot_path(snapshotter, file)
-  
+
   if (!file.exists(path)) {
     return(FALSE)
   }

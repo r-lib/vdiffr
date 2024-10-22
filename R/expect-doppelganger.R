@@ -54,6 +54,7 @@
 #'   Internally, this argument is passed to
 #'   [testthat::expect_snapshot_file()].
 #'
+#' @inheritParams testthat::expect_snapshot_file
 #'
 #' @section Debugging:
 #' It is sometimes difficult to understand the cause of a failure.
@@ -96,7 +97,8 @@ expect_doppelganger <- function(title,
                                 path = deprecated(),
                                 ...,
                                 writer = write_svg,
-                                cran = FALSE) {
+                                cran = FALSE,
+                                variant = NULL) {
   testthat::local_edition(3)
 
   fig_name <- str_standardise(title)
@@ -135,6 +137,7 @@ expect_doppelganger <- function(title,
       testcase,
       name = file,
       cran = cran,
+      variant = variant,
       compare = testthat::compare_file_text
     ),
     expectation_failure = function(cnd) {

@@ -1,5 +1,8 @@
 # vdiffr (development version)
 
+* Added support for snapshot variants (#125).
+
+
 # vdiffr 1.0.7
 
 * Revert back to C++11 to work around a GCC issue (#137).
@@ -95,7 +98,7 @@ a bugfix.
   Font sizes are now precomputed for the first 50000 unicode points.
   This allows deterministic computation of text box extents without
   the freetype and harfbuzz dependencies.
-  
+
   Note: The main visible change of this update is that points now look
   smaller. Points generated with the previous SVG engine were too large.
 

@@ -82,3 +82,10 @@ test_that("skips and unexpected errors reset snapshots (r-lib/testthat#1393)", {
   expect_true(file.exists("test-snapshot/_snaps/snapshot/error-resets-snapshots.svg"))
   expect_true(file.exists("test-snapshot/_snaps/snapshot/skip-resets-snapshots.svg"))
 })
+
+test_that("`expect_doppelganger()` supports variants", {
+  p1 <- ggplot2::ggplot()
+  p2 <- ggplot2::ggplot() + ggplot2::geom_histogram()
+  expect_doppelganger("variant", p1, variant = "foo")
+  expect_doppelganger("variant", p2, variant = "bar")
+})

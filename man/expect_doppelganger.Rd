@@ -10,7 +10,8 @@ expect_doppelganger(
   path = deprecated(),
   ...,
   writer = write_svg,
-  cran = FALSE
+  cran = FALSE,
+  variant = NULL
 )
 }
 \arguments{
@@ -59,6 +60,11 @@ package.
 
 Internally, this argument is passed to
 \code{\link[testthat:expect_snapshot_file]{testthat::expect_snapshot_file()}}.}
+
+\item{variant}{If not-\code{NULL}, results will be saved in
+\verb{_snaps/{variant}/{test}/{name}.{ext}}. This allows you to create
+different snapshots for different scenarios, like different operating
+systems or different R versions.}
 }
 \description{
 \code{expect_doppelganger()} is a testthat expectation for graphical

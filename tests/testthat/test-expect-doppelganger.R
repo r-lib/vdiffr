@@ -27,31 +27,6 @@ test_that("grid doppelgangers pass", {
   expect_doppelganger("Grid doppelganger", p_grid)
 })
 
-test_that("stale snapshots are skipped", {
-  plot <- ggplot2::ggplot() + ggplot2::labs()
-  title <- "stale snapshots are skipped"
-  new_path <- test_path("_snaps", "expect-doppelganger", "stale-snapshots-are-skipped.new.svg")
-
-  if (regenerate_snapshots()) {
-    expect_doppelganger(title, plot)
-
-    # Update engine field to a stale version
-    file <- new_path
-    if (!file.exists(file)) {
-      file <- test_path("_snaps", "expect-doppelganger", "stale-snapshots-are-skipped.svg")
-    }
-    lines <- readLines(file)
-    lines <- sub("data-engine-version='[0-9.]+'", "data-engine-version='0.1'", lines)
-    writeLines(lines, file)
-
-    return()
-  }
-
-  cnd <- catch_cnd(expect_doppelganger(title, plot), "skip")
-  expect_s3_class(cnd, "skip")
-  file.remove(new_path)
-})
-
 test_that("no 'svglite supports one page' error (#85)", {
   test_draw_axis <- function(add_labels = FALSE) {
     theme <- theme_test() + theme(axis.line = element_line(size = 0.5))

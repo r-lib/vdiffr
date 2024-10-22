@@ -54,3 +54,23 @@ It is sometimes difficult to understand the cause of a doppelganger failure. A f
 To help you understand the causes of a failure, vdiffr automatically logs the SVG diff of all failures when run under R CMD check. The log is located in `tests/vdiffr.Rout.fail` and should be displayed on Travis.
 
 You can also set the `VDIFFR_LOG_PATH` environment variable with `Sys.setenv()` to unconditionally (also interactively) log failures in the file pointed by the variable.
+
+
+## Building vdiffr
+
+_This section is only relevant for building vdiffr from scratch, as opposed to installing from a pre-built package on CRAN._
+
+Building vdiffr requires the system dependency libpng. As vdiffr doesn't have any build-time configuration, your R configuration must point to libpng's `include` and `lib` folders.
+
+For instance on macOS, install libpng with:
+
+```sh
+brew install libpng
+```
+
+And make sure your `~/.R/Makevars` knows about Homebrew's `include` and `lib` folders where libpng should now be installed. On arm64 hardware, this would be:
+
+```mk
+CPPFLAGS += -I/opt/homebrew/include
+LDFLAGS += -L/opt/homebrew/lib
+```

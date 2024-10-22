@@ -103,6 +103,11 @@ To help you understand the causes of a failure, vdiffr automatically logs the SV
 You can also set the `VDIFFR_LOG_PATH` environment variable with `Sys.setenv()` to unconditionally (also interactively) log failures in the file pointed by the variable.
 
 
+### Skipping all vdiffr checks on some platforms
+
+See ggplot2's approach which wraps `expect_doppelganger()` with a version that that calls `testthat::skip()` on the relevant platforms (as determined by environment variables): https://github.com/tidyverse/ggplot2/blob/ddd207e926cc1c1847dc661d9a099b8ec19c4010/tests/testthat/helper-vdiffr.R#L1-L15.
+
+
 ## Building vdiffr
 
 _This section is only relevant for building vdiffr from scratch, as opposed to installing from a pre-built package on CRAN._

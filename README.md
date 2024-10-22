@@ -6,7 +6,7 @@
 [![Codecov test coverage](https://codecov.io/gh/r-lib/vdiffr/graph/badge.svg)](https://app.codecov.io/gh/r-lib/vdiffr)
 <!-- badges: end -->
 
-vdiffr is a testthat extension for monitoring the appearance of R plots. It generates reproducible SVG files and registers them as the [testthat snapshots](https://testthat.r-lib.org/articles/snapshotting.html).
+vdiffr is a testthat extension for monitoring the appearance of R plots. It generates reproducible SVG files and registers them as [testthat snapshots](https://testthat.r-lib.org/articles/snapshotting.html).
 
 
 ## How to use vdiffr
@@ -26,7 +26,7 @@ vdiffr integrates with testthat through the `expect_doppelganger()` expectation.
 
 - A title. This title is used in two ways. First, the title is standardised (it is converted to lowercase and any character that is not alphanumeric or a space is turned into a dash) and used as filename for storing the figure. Secondly, with ggplot2 figures the title is automatically added to the plot with `ggtitle()` (only if no ggtitle has been set).
 
-- A figure. This can be a ggplot object, a recordedplot, a function to be called, or more generally any object with a `print` method.
+- A figure. This can be a ggplot object, a recorded plot, a function to be called, or more generally any object with a `print` method.
 
 The snapshots are recorded in subfolders of the `_snaps/` directory.
 
@@ -47,7 +47,7 @@ have been assigned a theme).
 
 It is sometimes difficult to understand the cause of a doppelganger failure. A frequent cause of failure is undeterministic generation of plots. Potential culprits are:
 
-* Some of the plot components depend on random variation. Try setting a seed.
+* Some of the plot components depend on random variation. Try setting a seed, for instance with [`withr::local_seed()`](https://withr.r-lib.org/reference/with_seed.html).
 
 * The plot depends on some system library. For instance sf plots depend on libraries like GEOS and GDAL. It might not be possible to test these plots with vdiffr (which can still be used for manual inspection, add a [testthat::skip()] before the `expect_doppelganger()` call in that case).
 

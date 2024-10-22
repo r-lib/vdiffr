@@ -1,9 +1,9 @@
 # vdiffr
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/r-lib/vdiffr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/vdiffr?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/vdiffr)](https://cran.r-project.org/package=vdiffr)
 [![R-CMD-check](https://github.com/r-lib/vdiffr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/vdiffr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/vdiffr/graph/badge.svg)](https://app.codecov.io/gh/r-lib/vdiffr)
 <!-- badges: end -->
 
 vdiffr is a testthat extension for monitoring the appearance of R plots. It generates reproducible SVG files and registers them as the [testthat snapshots](https://testthat.r-lib.org/articles/snapshotting.html).

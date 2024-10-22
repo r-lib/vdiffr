@@ -2,27 +2,33 @@ Package: vdiffr
 Title: Visual Regression Testing and Graphical Diffing
 Version: 1.0.7.9000
 Authors@R: c(
-    person("Lionel", "Henry", , "lionel@posit.co", c("cre", "aut")),
-    person("Thomas Lin", "Pedersen", , "thomas.pedersen@posit.co", 
-           role = "aut", comment = c(ORCID = "0000-0002-5147-4711")),
+    person("Lionel", "Henry", , "lionel@posit.co", role = c("cre", "aut")),
+    person("Thomas Lin", "Pedersen", , "thomas.pedersen@posit.co", role = "aut",
+           comment = c(ORCID = "0000-0002-5147-4711")),
     person("Posit Software, PBC", role = c("cph", "fnd")),
-    person("T Jake", "Luciani", , "jake@apache.org", "aut", comment = "svglite"),
-    person("Matthieu", "Decorde", , "matthieu.decorde@ens-lyon.fr", "aut", comment = "svglite"),
-    person("Vaudor", "Lise", , "lise.vaudor@ens-lyon.fr", "aut", comment = "svglite"),
-    person("Tony", "Plate", role = "ctb", comment = "svglite: Early line dashing code"),
-    person("David", "Gohel", role = "ctb", comment = "svglite: Line dashing code and raster code"),
-    person("Yixuan", "Qiu", role = "ctb", comment = "svglite: Improved styles; polypath implementation"),
-    person("Håkon", "Malmedal", role = "ctb", comment = "svglite: Opacity code")
-    )
-Encoding: UTF-8
-Description: An extension to the 'testthat' package that makes it easy
-    to add graphical unit tests. It provides a Shiny application to
-    manage the test cases.
+    person("T Jake", "Luciani", , "jake@apache.org", role = "aut",
+           comment = "svglite"),
+    person("Matthieu", "Decorde", , "matthieu.decorde@ens-lyon.fr", role = "aut",
+           comment = "svglite"),
+    person("Vaudor", "Lise", , "lise.vaudor@ens-lyon.fr", role = "aut",
+           comment = "svglite"),
+    person("Tony", "Plate", role = "ctb",
+           comment = "svglite: Early line dashing code"),
+    person("David", "Gohel", role = "ctb",
+           comment = "svglite: Line dashing code and raster code"),
+    person("Yixuan", "Qiu", role = "ctb",
+           comment = "svglite: Improved styles; polypath implementation"),
+    person("Håkon", "Malmedal", role = "ctb",
+           comment = "svglite: Opacity code")
+  )
+Description: An extension to the 'testthat' package that makes it easy to
+    add graphical unit tests. It provides a Shiny application to manage
+    the test cases.
 License: MIT + file LICENSE
-LazyData: true
-ByteCompile: true
+URL: https://vdiffr.r-lib.org/, https://github.com/r-lib/vdiffr
+BugReports: https://github.com/r-lib/vdiffr/issues
 Depends:
-    R (>= 3.2.0)
+    R (>= 4.0)
 Imports:
     diffobj,
     glue,
@@ -39,9 +45,10 @@ Suggests:
     withr
 LinkingTo:
     cpp11
-RoxygenNote: 7.3.2
-Roxygen: list(markdown = TRUE)
-URL: https://vdiffr.r-lib.org/, https://github.com/r-lib/vdiffr
-BugReports: https://github.com/r-lib/vdiffr/issues
-SystemRequirements: C++11, libpng
+ByteCompile: true
 Config/Needs/website: tidyverse/tidytemplate
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+SystemRequirements: C++11, libpng

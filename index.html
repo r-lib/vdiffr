@@ -63,7 +63,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>vdiffr is a testthat extension for monitoring the appearance of R plots. It generates reproducible SVG files and registers them as the <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">testthat snapshots</a>.</p>
+<p>vdiffr is a testthat extension for monitoring the appearance of R plots. It generates reproducible SVG files and registers them as <a href="https://testthat.r-lib.org/articles/snapshotting.html" class="external-link">testthat snapshots</a>.</p>
 <div class="section level2">
 <h2 id="how-to-use-vdiffr">How to use vdiffr<a class="anchor" aria-label="anchor" href="#how-to-use-vdiffr"></a>
 </h2>
@@ -79,7 +79,7 @@
 <p>vdiffr integrates with testthat through the <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> expectation. It takes as arguments:</p>
 <ul>
 <li><p>A title. This title is used in two ways. First, the title is standardised (it is converted to lowercase and any character that is not alphanumeric or a space is turned into a dash) and used as filename for storing the figure. Secondly, with ggplot2 figures the title is automatically added to the plot with <code>ggtitle()</code> (only if no ggtitle has been set).</p></li>
-<li><p>A figure. This can be a ggplot object, a recordedplot, a function to be called, or more generally any object with a <code>print</code> method.</p></li>
+<li><p>A figure. This can be a ggplot object, a recorded plot, a function to be called, or more generally any object with a <code>print</code> method.</p></li>
 </ul>
 <p>The snapshots are recorded in subfolders of the <code>_snaps/</code> directory.</p>
 <p>```{r} disp_hist_base &lt;- function() hist(mtcars$disp) disp_hist_ggplot &lt;- ggplot(mtcars, aes(disp)) + geom_histogram()</p>
@@ -91,7 +91,7 @@
 </h3>
 <p>It is sometimes difficult to understand the cause of a doppelganger failure. A frequent cause of failure is undeterministic generation of plots. Potential culprits are:</p>
 <ul>
-<li><p>Some of the plot components depend on random variation. Try setting a seed.</p></li>
+<li><p>Some of the plot components depend on random variation. Try setting a seed, for instance with <a href="https://withr.r-lib.org/reference/with_seed.html" class="external-link"><code>withr::local_seed()</code></a>.</p></li>
 <li><p>The plot depends on some system library. For instance sf plots depend on libraries like GEOS and GDAL. It might not be possible to test these plots with vdiffr (which can still be used for manual inspection, add a [testthat::skip()] before the <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> call in that case).</p></li>
 </ul>
 <p>To help you understand the causes of a failure, vdiffr automatically logs the SVG diff of all failures when run under R CMD check. The log is located in <code>tests/vdiffr.Rout.fail</code> and should be displayed on Travis.</p>

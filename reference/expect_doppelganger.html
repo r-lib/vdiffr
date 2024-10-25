@@ -70,7 +70,8 @@ can still run other checks on old versions of R.</p>
 <span>  path <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  writer <span class="op">=</span> <span class="va">write_svg</span>,</span>
-<span>  cran <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  cran <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  variant <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -126,6 +127,13 @@ manually assess whether changes reflect actual problems in your
 package.</p>
 <p>Internally, this argument is passed to
 <code><a href="https://testthat.r-lib.org/reference/expect_snapshot_file.html" class="external-link">testthat::expect_snapshot_file()</a></code>.</p></dd>
+
+
+<dt id="arg-variant">variant<a class="anchor" aria-label="anchor" href="#arg-variant"></a></dt>
+<dd><p>If not-<code>NULL</code>, results will be saved in
+<code>_snaps/{variant}/{test}/{name}.{ext}</code>. This allows you to create
+different snapshots for different scenarios, like different operating
+systems or different R versions.</p></dd>
 
 </dl></div>
     <div class="section level2">

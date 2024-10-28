@@ -1,6 +1,8 @@
 vdiffr_skip_stale()
 
 test_that("Failures are logged", {
+  skip_on_cran()
+
   reporter <- testthat::SilentReporter$new()
 
   path <- create_mock_pkg()

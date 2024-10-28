@@ -1,4 +1,4 @@
-# vdiffr (development version)
+# vdiffr 1.0.8
 
 * Added support for snapshot variants (#125).
 

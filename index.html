@@ -8,10 +8,10 @@
 <title>Visual Regression Testing and Graphical Diffing • vdiffr</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Visual Regression Testing and Graphical Diffing">
 <meta name="description" content="An extension to the testthat package that makes it easy to add graphical unit tests. It provides a Shiny application to manage the test cases.">
 <meta property="og:description" content="An extension to the testthat package that makes it easy to add graphical unit tests. It provides a Shiny application to manage the test cases.">
@@ -82,46 +82,41 @@
 <li><p>A figure. This can be a ggplot object, a recorded plot, a function to be called, or more generally any object with a <code>print</code> method.</p></li>
 </ul>
 <p>The snapshots are recorded in subfolders of the <code>_snaps/</code> directory.</p>
-<p>```{r} disp_hist_base &lt;- function() hist(mtcars$disp) disp_hist_ggplot &lt;- ggplot(mtcars, aes(disp)) + geom_histogram()</p>
-<p>vdiffr::expect_doppelganger(“Base graphics histogram”, disp_hist_base) vdiffr::expect_doppelganger(“ggplot2 histogram”, disp_hist_ggplot)</p>
-<pre><code>
-Note that in addition to automatic ggtitles, ggplot2 figures are
-assigned the minimalistic theme `theme_test()` (unless they already
-have been assigned a theme).
-
-
-### Debugging
-
-It is sometimes difficult to understand the cause of a doppelganger failure. A frequent cause of failure is undeterministic generation of plots. Potential culprits are:
-
-* Some of the plot components depend on random variation. Try setting a seed, for instance with [`withr::local_seed()`](https://withr.r-lib.org/reference/with_seed.html).
-
-* The plot depends on some system library. For instance sf plots depend on libraries like GEOS and GDAL. It might not be possible to test these plots with vdiffr (which can still be used for manual inspection, add a [testthat::skip()] before the `expect_doppelganger()` call in that case).
-
-To help you understand the causes of a failure, vdiffr automatically logs the SVG diff of all failures when run under R CMD check. The log is located in `tests/vdiffr.Rout.fail` and should be displayed in your CI logs.
-
-You can also set the `VDIFFR_LOG_PATH` environment variable with `Sys.setenv()` to unconditionally (also interactively) log failures in the file pointed by the variable.
-
-
-### Skipping all vdiffr checks on some platforms
-
-See ggplot2's approach which wraps `expect_doppelganger()` with a version that that calls `testthat::skip()` on the relevant platforms (as determined by environment variables): https://github.com/tidyverse/ggplot2/blob/ddd207e926cc1c1847dc661d9a099b8ec19c4010/tests/testthat/helper-vdiffr.R#L1-L15.
-
-
-## Building vdiffr
-
-_This section is only relevant for building vdiffr from scratch, as opposed to installing from a pre-built package on CRAN._
-
-Building vdiffr requires the system dependency libpng. As vdiffr doesn't have any build-time configuration, your R configuration must point to libpng's `include` and `lib` folders.
-
-For instance on macOS, install libpng with:
-
-```sh
-brew install libpng</code></pre>
-<p>And make sure your <code>~/.R/Makevars</code> knows about Homebrew’s <code>include</code> and <code>lib</code> folders where libpng should now be installed. On arm64 hardware, this would be:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode mk"><code class="sourceCode makefile"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="dt">CPPFLAGS</span> <span class="ch">+=</span><span class="st"> -I/opt/homebrew/include</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="dt">LDFLAGS</span> <span class="ch">+=</span><span class="st"> -L/opt/homebrew/lib</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">disp_hist_base</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span><span class="op">)</span></span>
+<span><span class="va">disp_hist_ggplot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">disp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">vdiffr</span><span class="fu">::</span><span class="fu"><a href="reference/expect_doppelganger.html">expect_doppelganger</a></span><span class="op">(</span><span class="st">"Base graphics histogram"</span>, <span class="va">disp_hist_base</span><span class="op">)</span></span>
+<span><span class="fu">vdiffr</span><span class="fu">::</span><span class="fu"><a href="reference/expect_doppelganger.html">expect_doppelganger</a></span><span class="op">(</span><span class="st">"ggplot2 histogram"</span>, <span class="va">disp_hist_ggplot</span><span class="op">)</span></span></code></pre></div>
+<p>Note that in addition to automatic ggtitles, ggplot2 figures are assigned the minimalistic theme <code>theme_test()</code> (unless they already have been assigned a theme).</p>
 </div>
+<div class="section level3">
+<h3 id="debugging">Debugging<a class="anchor" aria-label="anchor" href="#debugging"></a>
+</h3>
+<p>It is sometimes difficult to understand the cause of a doppelganger failure. A frequent cause of failure is undeterministic generation of plots. Potential culprits are:</p>
+<ul>
+<li><p>Some of the plot components depend on random variation. Try setting a seed, for instance with <a href="https://withr.r-lib.org/reference/with_seed.html" class="external-link"><code>withr::local_seed()</code></a>.</p></li>
+<li><p>The plot depends on some system library. For instance sf plots depend on libraries like GEOS and GDAL. It might not be possible to test these plots with vdiffr (which can still be used for manual inspection, add a [testthat::skip()] before the <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> call in that case).</p></li>
+</ul>
+<p>To help you understand the causes of a failure, vdiffr automatically logs the SVG diff of all failures when run under R CMD check. The log is located in <code>tests/vdiffr.Rout.fail</code> and should be displayed in your CI logs.</p>
+<p>You can also set the <code>VDIFFR_LOG_PATH</code> environment variable with <code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv()</a></code> to unconditionally (also interactively) log failures in the file pointed by the variable.</p>
+</div>
+<div class="section level3">
+<h3 id="skipping-all-vdiffr-checks-on-some-platforms">Skipping all vdiffr checks on some platforms<a class="anchor" aria-label="anchor" href="#skipping-all-vdiffr-checks-on-some-platforms"></a>
+</h3>
+<p>See ggplot2’s approach which wraps <code><a href="reference/expect_doppelganger.html">expect_doppelganger()</a></code> with a version that that calls <code><a href="https://testthat.r-lib.org/reference/skip.html" class="external-link">testthat::skip()</a></code> on the relevant platforms (as determined by environment variables): <a href="https://github.com/tidyverse/ggplot2/blob/ddd207e926cc1c1847dc661d9a099b8ec19c4010/tests/testthat/helper-vdiffr.R#L1-L15" class="external-link uri">https://github.com/tidyverse/ggplot2/blob/ddd207e926cc1c1847dc661d9a099b8ec19c4010/tests/testthat/helper-vdiffr.R#L1-L15</a>.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="building-vdiffr">Building vdiffr<a class="anchor" aria-label="anchor" href="#building-vdiffr"></a>
+</h2>
+<p><em>This section is only relevant for building vdiffr from scratch, as opposed to installing from a pre-built package on CRAN.</em></p>
+<p>Building vdiffr requires the system dependency libpng. As vdiffr doesn’t have any build-time configuration, your R configuration must point to libpng’s <code>include</code> and <code>lib</code> folders.</p>
+<p>For instance on macOS, install libpng with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">brew</span> install libpng</span></code></pre></div>
+<p>And make sure your <code>~/.R/Makevars</code> knows about Homebrew’s <code>include</code> and <code>lib</code> folders where libpng should now be installed. On arm64 hardware, this would be:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode mk"><code class="sourceCode makefile"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dt">CPPFLAGS</span> <span class="ch">+=</span><span class="st"> -I/opt/homebrew/include</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="dt">LDFLAGS</span> <span class="ch">+=</span><span class="st"> -L/opt/homebrew/lib</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -159,14 +154,14 @@ brew install libpng</code></pre>
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://github.com/lionel-" class="external-link">Lionel Henry</a> <br><small class="roles"> Maintainer, author </small>  </li>
+<a href="https://github.com/lionel-" class="external-link">Lionel Henry</a> <br><small class="roles"> Maintainer, author </small>   </li>
 <li>
-<a href="https://data-imaginist.com" class="external-link">Thomas Lin Pedersen</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://data-imaginist.com" class="external-link">Thomas Lin Pedersen</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5147-4711" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>
-<a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
-<li>T Jake Luciani <br><small class="roles"> Author </small>  </li>
-<li>Matthieu Decorde <br><small class="roles"> Author </small>  </li>
-<li>Vaudor Lise <br><small class="roles"> Author </small>  </li>
+<a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>   </li>
+<li>T Jake Luciani <br><small class="roles"> Author </small>   </li>
+<li>Matthieu Decorde <br><small class="roles"> Author </small>   </li>
+<li>Vaudor Lise <br><small class="roles"> Author </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -191,7 +186,7 @@ brew install libpng</code></pre>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
   </div></footer>

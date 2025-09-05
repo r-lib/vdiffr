@@ -30,7 +30,7 @@ vdiffr integrates with testthat through the `expect_doppelganger()` expectation.
 
 The snapshots are recorded in subfolders of the `_snaps/` directory.
 
-```{r}
+```r
 disp_hist_base <- function() hist(mtcars$disp)
 disp_hist_ggplot <- ggplot(mtcars, aes(disp)) + geom_histogram()
 

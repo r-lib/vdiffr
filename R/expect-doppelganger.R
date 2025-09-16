@@ -8,7 +8,7 @@
 #' about snapshotting in the [testthat snapshots
 #' vignette](https://testthat.r-lib.org/articles/snapshotting.html).
 #'
-#' Note that `expect_doppelgagner()` requires R version 4.1.0. If run
+#' Note that `expect_doppelganger()` requires R version 4.1.0. If run
 #' on an earlier version of R, it emits a `testthat::skip()` so that you
 #' can still run other checks on old versions of R.
 #'
@@ -19,7 +19,7 @@
 #'   applied to the figure with `ggtitle()`.
 #'
 #'   The title is also used as file name for storing SVG (in a
-#'   sanitzed form, with special characters converted to `"-"`).
+#'   sanitized form, with special characters converted to `"-"`).
 #' @param fig A figure to test. This can be a ggplot object, a
 #'   recordedplot, or more generally any object with a `print` method.
 #'

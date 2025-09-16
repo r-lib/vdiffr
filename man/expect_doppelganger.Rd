@@ -22,7 +22,7 @@ If a ggplot2 figure doesn't have a title already, \code{title} is
 applied to the figure with \code{ggtitle()}.
 
 The title is also used as file name for storing SVG (in a
-sanitzed form, with special characters converted to \code{"-"}).}
+sanitized form, with special characters converted to \code{"-"}).}
 
 \item{fig}{A figure to test. This can be a ggplot object, a
 recordedplot, or more generally any object with a \code{print} method.
@@ -72,7 +72,7 @@ plots. It generates SVG snapshots that you can review graphically
 with \code{\link[testthat:snapshot_accept]{testthat::snapshot_review()}}. You will find more information
 about snapshotting in the \href{https://testthat.r-lib.org/articles/snapshotting.html}{testthat snapshots vignette}.
 
-Note that \code{expect_doppelgagner()} requires R version 4.1.0. If run
+Note that \code{expect_doppelganger()} requires R version 4.1.0. If run
 on an earlier version of R, it emits a \code{testthat::skip()} so that you
 can still run other checks on old versions of R.
 }

@@ -29,7 +29,7 @@ test_that("grid doppelgangers pass", {
 
 test_that("no 'svglite supports one page' error (#85)", {
   test_draw_axis <- function(add_labels = FALSE) {
-    theme <- theme_test() + theme(axis.line = element_line(size = 0.5))
+    theme <- theme_test() + theme(axis.line = element_line(linewidth = 0.5))
     positions <- c("top", "right", "bottom", "left")
 
     n_breaks <- 3

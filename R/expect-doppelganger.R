@@ -102,7 +102,7 @@ expect_doppelganger <- function(title,
   testthat::local_edition(3)
 
   if (!is_string(title)) {
-    abort("title argument must be a string")
+    abort("`title` must be a string")
   }
   
   fig_name <- str_standardise(title)

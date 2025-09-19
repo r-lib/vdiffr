@@ -101,6 +101,10 @@ expect_doppelganger <- function(title,
                                 variant = NULL) {
   testthat::local_edition(3)
 
+  if (!is_string(title)) {
+    abort("`title` must be a string")
+  }
+  
   fig_name <- str_standardise(title)
   file <- paste0(fig_name, ".svg")
 

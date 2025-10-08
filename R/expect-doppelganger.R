@@ -7,7 +7,13 @@
 #' with [testthat::snapshot_review()]. You will find more information
 #' about snapshotting in the [testthat snapshots
 #' vignette](https://testthat.r-lib.org/articles/snapshotting.html).
-#'
+#' 
+#' `expect_doppelganger()`'s default SVG `writer` is [write_svg()], which is
+#' designed to produce stable, deterministic output. To this end, it uses the
+#' font families Liberation and Symbola, overriding whatever else might be
+#' specified in the plot. If you want to use different fonts, you can provide
+#' your own `writer` function.
+#' 
 #' Note that `expect_doppelganger()` requires R version 4.1.0. If run
 #' on an earlier version of R, it emits a `testthat::skip()` so that you
 #' can still run other checks on old versions of R.

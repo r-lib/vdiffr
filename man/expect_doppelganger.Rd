@@ -72,6 +72,12 @@ plots. It generates SVG snapshots that you can review graphically
 with \code{\link[testthat:snapshot_accept]{testthat::snapshot_review()}}. You will find more information
 about snapshotting in the \href{https://testthat.r-lib.org/articles/snapshotting.html}{testthat snapshots vignette}.
 
+\code{expect_doppelganger()}'s default SVG \code{writer} is \code{\link[=write_svg]{write_svg()}}, which is
+designed to produce stable, deterministic output. To this end, it uses the
+font families Liberation and Symbola, overriding whatever else might be
+specified in the plot. If you want to use different fonts, you can provide
+your own \code{writer} function.
+
 Note that \code{expect_doppelganger()} requires R version 4.1.0. If run
 on an earlier version of R, it emits a \code{testthat::skip()} so that you
 can still run other checks on old versions of R.

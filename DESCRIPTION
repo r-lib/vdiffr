@@ -1,6 +1,6 @@
 Package: vdiffr
 Title: Visual Regression Testing and Graphical Diffing
-Version: 1.0.8.9000
+Version: 1.0.9
 Authors@R: c(
     person("Lionel", "Henry", , "lionel@posit.co", role = "aut"),
     person("Thomas Lin", "Pedersen", , "thomas.pedersen@posit.co", role = c("cre", "aut"),

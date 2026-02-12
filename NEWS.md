@@ -1,5 +1,8 @@
 # vdiffr (development version)
 
+* Fixes for CRAN checks.
+
+
 # vdiffr 1.0.8
 
 * Added support for snapshot variants (#125).

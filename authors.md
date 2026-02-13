@@ -2,10 +2,10 @@
 
 ## Authors
 
-- **[Lionel Henry](https://github.com/lionel-)**. Maintainer, author.
+- **[Lionel Henry](https://github.com/lionel-)**. Author.
 
-- **[Thomas Lin Pedersen](https://data-imaginist.com)**. Author.
-  [](https://orcid.org/0000-0002-5147-4711)
+- **[Thomas Lin Pedersen](https://data-imaginist.com)**. Maintainer,
+  author. [](https://orcid.org/0000-0002-5147-4711)
 
 - **[![Posit](https://www.tidyverse.org/posit-logo.svg)](https://www.posit.co)**.
   Copyright holder, funder.
@@ -38,12 +38,12 @@ Source:
 
 Henry L, Pedersen T, Luciani T, Decorde M, Lise V (2026). *vdiffr:
 Visual Regression Testing and Graphical Diffing*. R package version
-1.0.8.9000, <https://vdiffr.r-lib.org/>.
+1.0.9, <https://vdiffr.r-lib.org/>.
 
     @Manual{,
       title = {vdiffr: Visual Regression Testing and Graphical Diffing},
       author = {Lionel Henry and Thomas Lin Pedersen and T Jake Luciani and Matthieu Decorde and Vaudor Lise},
       year = {2026},
-      note = {R package version 1.0.8.9000},
+      note = {R package version 1.0.9},
       url = {https://vdiffr.r-lib.org/},
     }

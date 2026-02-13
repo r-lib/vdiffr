@@ -1,6 +1,8 @@
 # Changelog
 
-## vdiffr (development version)
+## vdiffr 1.0.9
+
+- Fixes for CRAN checks.
 
 ## vdiffr 1.0.8
 

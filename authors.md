@@ -34,16 +34,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/r-lib/vdiffr/blob/v1.0.9/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/r-lib/vdiffr/blob/main/DESCRIPTION)
 
 Henry L, Pedersen T, Luciani T, Decorde M, Lise V (2026). *vdiffr:
 Visual Regression Testing and Graphical Diffing*. R package version
-1.0.9, <https://vdiffr.r-lib.org/>.
+1.0.9.9000, <https://vdiffr.r-lib.org/>.
 
     @Manual{,
       title = {vdiffr: Visual Regression Testing and Graphical Diffing},
       author = {Lionel Henry and Thomas Lin Pedersen and T Jake Luciani and Matthieu Decorde and Vaudor Lise},
       year = {2026},
-      note = {R package version 1.0.9},
+      note = {R package version 1.0.9.9000},
       url = {https://vdiffr.r-lib.org/},
     }

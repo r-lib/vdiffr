@@ -34,7 +34,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/r-lib/vdiffr/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/r-lib/vdiffr/blob/v1.0.9/DESCRIPTION)
 
 Henry L, Pedersen T, Luciani T, Decorde M, Lise V (2026). *vdiffr:
 Visual Regression Testing and Graphical Diffing*. R package version
